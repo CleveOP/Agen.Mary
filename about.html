@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Sobre Nós - MS Criações</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="./img/Mídia.jfif" alt="Logo MS Criações">
+            <h1 class="logo"><a href="index.html">MS Criações</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="services.html">Serviços</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="container">
+            <h2>Sobre Nós</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>A MS Criaçoes é uma agência apaixonada por design e marketing. Nossa missão é ajudar marcas a se destacarem no mercado digital com criatividade e estratégia. Acreditamos que uma boa identidade visual é a alma do negócio.</p>
+                    <p>Com anos de experiência no mercado, nossa equipe é composta por designers e estrategistas dedicados a transformar a visão de nossos clientes em realidade. Nosso foco é criar soluções visuais e de marketing que não apenas pareçam boas, mas que também gerem resultados tangíveis.</p>
+                    <p>Trabalhamos de perto com cada cliente, desde a concepção da ideia até a entrega final, garantindo que cada projeto reflita a essência e os objetivos da marca. Venha construir o futuro da sua marca conosco!</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/400x350.png?text=Nossa+Equipe" alt="Imagem da equipe ou escritório da MS Criações">
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="container">
+            <h2>Conheça Nossos Trabalhos</h2>
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://via.placeholder.com/900x450.png?text=Projeto+de+Identidade+Visual" alt="Projeto 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://via.placeholder.com/900x450.png?text=Campanha+de+Mídias+Sociais" alt="Projeto 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://via.placeholder.com/900x450.png?text=Material+Gráfico+Criado" alt="Projeto 3">
+                    </div>
+                </div>
+                <button class="carousel-control prev">&lt;</button>
+                <button class="carousel-control next">&gt;</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-media">
+            <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>&copy; <span id="current-year"></span> MS Criações. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+    <!-- Incluindo nosso arquivo JavaScript principal -->
+    <script src="main.js" defer></script>
+</body>
+</html>
