@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>Galeria - MS Criações</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Estilos principais do site -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- Estilos específicos da galeria -->
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    
+    <header> 
+        <div class="container">
+            <img src="./img/Mídia.jfif" alt="Logo MS Criações">
+            <h1 class="logo"><a href="index.html">MS Criações</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="services.html">Serviços</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                    <li><a href="gallery.html">Galeria</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="gallery-page" class="container">
+            <div class="gallery-container">
+                <h2>Nossa Galeria</h2>
+        
+                <!-- Filtros da Galeria -->
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="identidade">Identidade Visual</button>
+                    <button class="filter-btn" data-filter="midias">Mídias Sociais</button>
+                    <button class="filter-btn" data-filter="design">Design Gráfico</button>
+                </div>
+        
+                <!-- Grid de Imagens -->
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-category="identidade"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&h=800&auto=format&fit=crop" alt="Projeto de Identidade Visual" data-caption="Projeto de Identidade Visual para Cliente X."><figcaption class="gallery-caption">Identidade Visual</figcaption></div>
+                    <div class="gallery-item" data-category="midias"><img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=800&h=800&auto=format&fit=crop" alt="Campanha de Mídias Sociais" data-caption="Campanha de Mídias Sociais para a marca Y."><figcaption class="gallery-caption">Mídias Sociais</figcaption></div>
+                    <div class="gallery-item" data-category="design"><img src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?q=80&w=800&h=800&auto=format&fit=crop" alt="Material Gráfico" data-caption="Criação de material gráfico para evento."><figcaption class="gallery-caption">Design Gráfico</figcaption></div>
+                    <div class="gallery-item" data-category="identidade"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&h=800&auto=format&fit=crop" alt="Branding" data-caption="Estratégia de Branding para startup de tecnologia."><figcaption class="gallery-caption">Branding</figcaption></div>
+                    <div class="gallery-item" data-category="midias"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&h=800&auto=format&fit=crop" alt="Engajamento" data-caption="Aumento de engajamento para o Cliente Z."><figcaption class="gallery-caption">Engajamento</figcaption></div>
+                    <div class="gallery-item" data-category="design"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&h=800&auto=format&fit=crop" alt="Apresentação" data-caption="Design de apresentação corporativa."><figcaption class="gallery-caption">Apresentação</figcaption></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox (Modal) -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Imagem em tela cheia">
+            <p id="lightbox-caption"></p>
+        </div>
+        <a class="lightbox-prev">&#10094;</a>
+        <a class="lightbox-next">&#10095;</a>
+    </div>
+
+    <footer>
+        <div class="social-media">
+            <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>&copy; <span id="current-year"></span> MS Criações. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+    <!-- Script da galeria -->
+    <script src="gallery.js"></script>
+    <!-- Script principal do site (para o menu ativo) -->
+    <script src="main.js" defer></script>
+</body>
+</html>
