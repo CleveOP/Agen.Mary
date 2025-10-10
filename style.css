@@ -1,7 +1,7 @@
 /* Reset básico e fontes */
 * {
-    margin: 0;
-    padding: 0;
+    margin: 0; /* Considere um reset mais moderno como o de Andy Bell se o projeto crescer */
+    padding: 0; /* https://piccalil.li/blog/a-modern-css-reset/ */
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
@@ -11,30 +11,56 @@ html, body {
     min-height: 100%;
 }
 
+/* Variáveis de tema: azul / branco / cinza */
+:root {
+    --blue-900: #061b61;
+    --blue-700: #16307f;
+    --blue-500: #2b61d1;
+    --blue-300: #5b8bf0;
+    --gray-600: #6b6b6b;
+    --white: #ffffff;
+    --surface: #f6f9ff;
+    --muted: #f0f3fa;
+    --accent: var(--blue-500);
+}
+
 body {
-    /* Gradiente sutil de um azul claro para branco */
-    background: linear-gradient(to bottom, #061b61, #ffffff);
-    color: #605f60; /* cinza para o texto principal */
+    /* Fundo claro e suave para dar ar de elegância */
+    background: linear-gradient(to bottom, var(--surface), var(--white));
+    color: var(--gray-600); /* cinza para o texto principal */
     line-height: 1.6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
 }
 
 
 .container {
     width: 80%;
     margin: auto;
-    overflow: hidden;
     padding: 0 20px;
+    /* A propriedade 'overflow: hidden' foi removida daqui.
+       É melhor aplicá-la apenas em componentes específicos que precisam dela,
+       para evitar cortar elementos como sombras ou menus dropdown inesperadamente.
+       O carrossel, por exemplo, já tem seu próprio 'overflow: hidden'.
+    */
+}
+
+/* Remove o overflow:hidden especificamente do container do cabeçalho */
+/* para permitir que o menu dropdown seja exibido corretamente. */
+header .container {
+    overflow: visible;
 }
 
 /* Cabeçalho */
 header {
-    background: #171d73; /* azul */
-    color: #ffffff; /* branco */
-    padding: 1rem 0;
-    border-bottom: none; /* Remove a borda que não é mais necessária */
+    background: var(--blue-900);
+    color: var(--white);
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
     position: sticky;
     top: 0;
     z-index: 1000;
+    backdrop-filter: saturate(120%) blur(4px);
 }
 
 header .container {
@@ -43,14 +69,21 @@ header .container {
     align-items: center;
 }
 
-/* Estilo para a imagem/logo no cabeçalho */ 
+/* Novo estilo para o link que agrupa logo e título */
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Estilo para a imagem/logo no cabeçalho */
 header .container img {
-    height: 200px; /* Define a altura da imagem */
+    height: 80px; /* Dimensão mais elegante e proporcional */
     width: auto;  /* Mantém a proporção correta */
-    margin-right: 10px;
-    border:solid 1px #ffffff; /* Adiciona um espaço entre a imagem e o texto */
-    border-radius: 50%; /* Adiciona a borda arredondada */
-    transition: transform 0.3s ease; /* Adiciona transição para o efeito de hover */
+    margin-right: 12px;
+    border: 2px solid rgba(255,255,255,0.06);
+    border-radius: 12px; /* canto arredondado sutil */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 /* Efeito de hover para o logo */
@@ -61,12 +94,6 @@ header .container img:hover {
 header .logo {
     font-weight: bold;
     color: #ffffff; /* branco */
-}
-
-/* Estilo para o link dentro do logo */
-header .logo a {
-    color: #ffffff; /* Garante que o texto do link seja branco */
-    text-decoration: none; /* Remove o sublinhado padrão do link */
 }
 
 header nav ul {
@@ -86,49 +113,172 @@ header nav a {
     border-radius: 5px; /* Bordas arredondadas */
     position: relative; /* Necessário para o efeito de movimento */
     top: 0;
-    transition: top 0.2s ease, background-color 0.2s ease; /* Transições suaves */
+    transition: top 0.2s ease, background-color 0.2s ease, color 0.2s ease; /* Transições suaves */
 }
 
 header nav a:hover {
     top: -3px; /* Move o link para cima */
-    background-color: rgba(255, 255, 255, 0.1); /* Fundo branco semitransparente */
+    background-color: rgba(255, 255, 255, 0.08); /* Fundo branco semitransparente */
+    color: var(--accent); /* Texto do link fica azul claro no hover */
 }
 
 /* Estilo para o link da página ativa no menu */
-header nav a.active {
-    /* O link ativo terá o mesmo efeito do hover, mas de forma permanente */
+header nav a.ativo {
     top: -3px;
-    background-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 3px 5px rgba(0,0,0,0.2); /* Adiciona uma sombra para destacar */
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 3px 8px rgba(6,27,97,0.12); /* sombra azulada sutil */
+    color: var(--accent);
+}
+
+/* --- Estilos para o Menu Dropdown --- */
+
+/* Contêiner do dropdown (o <li>) */
+header nav ul li.menu-suspenso {
+    position: relative; /* Necessário para posicionar o submenu */
+}
+
+/* Seta para baixo */
+header nav ul li.menu-suspenso .fa-chevron-down {
+    font-size: 0.8em; /* Tamanho um pouco menor que o texto */
+    margin-left: 5px;
+    transition: transform 0.3s ease; /* Adiciona uma transição suave para a rotação */
+}
+
+/* O menu dropdown (a <ul> aninhada) */
+.menu-suspenso-conteudo {
+    display: none; /* Escondido por padrão */
+    position: absolute;
+    top: 100%; /* Posiciona logo abaixo do item pai */
+    left: 0;
+    background-color: var(--blue-700); /* Mesmo tom do cabeçalho, mas levemente diferente */
+    box-shadow: 0 10px 30px rgba(6,27,97,0.12);
+    border-radius: 0 0 8px 8px; /* Bordas arredondadas apenas na parte inferior */
+    list-style: none;
+    padding: 8px 0;
+    min-width: 220px; /* Largura mínima para o dropdown */
+    z-index: 1002; /* Aumenta o z-index para garantir que fique acima de tudo */
+}
+
+/* Mostra o dropdown no hover */
+header nav ul li.menu-suspenso:hover .menu-suspenso-conteudo {
+    display: block;
+}
+
+/* Gira a seta para cima quando o menu está aberto */
+header nav ul li.menu-suspenso:hover .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* Itens dentro do dropdown */
+.menu-suspenso-conteudo li {
+    display: block; /* Faz os itens ficarem um abaixo do outro */
+    margin: 0;
+}
+
+.menu-suspenso-conteudo li a {
+    padding: 12px 20px;
+    display: block; /* Faz o link ocupar todo o espaço do <li> */
+    white-space: nowrap; /* Impede que o texto quebre em duas linhas */
 }
 
 /* Seção Hero (Banner) */
-#hero {
-    background: #171d73; /* azul */
-    color: #ffffff; /* branco */
-    text-align: center;
-    padding: 4rem 0;
+#inicio-hero {
+    padding: 0; /* Remove o padding para a imagem ocupar todo o espaço */
+    position: relative;
+    height: 60vh; /* Altura do carrossel, 60% da altura da tela */
+    min-height: 400px;
+    color: #fff;
+    overflow: hidden;
 }
 
-#hero h2 {
+#inicio-hero .carrossel-interno {
+    height: 100%;
+}
+
+#inicio-hero .carrossel-item {
+    height: 100%;
+    width: 100%;
+}
+
+#inicio-hero .carrossel-item img {
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra todo o espaço sem distorcer */
+    filter: brightness(0.6); /* Deixa a imagem um pouco mais clara */
+}
+
+#inicio-hero .carrossel-legenda {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+}
+
+/* Correção: empilhar slides do hero para evitar legendas sobrepostas */
+#inicio-hero .carrossel-interno {
+    position: relative; /* permite posicionar os slides por cima */
+}
+
+#inicio-hero .carrossel-item {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* esconder por padrão */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s ease, visibility 0.45s ease, transform 0.45s ease;
+}
+
+#inicio-hero .carrossel-item.ativo {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    z-index: 2; /* coloca o slide ativo acima dos demais */
+}
+
+/* Esconde legendas de slides inativos (precaução extra) */
+#inicio-hero .carrossel-item:not(.ativo) .carrossel-legenda {
+    display: none !important;
+}
+
+#inicio-hero .carrossel-legenda {
+    z-index: 3; /* garante que a legenda fique sobre a imagem */
+}
+
+#inicio-hero h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: var(--white); /* Garante que o h2 seja branco */
+    text-shadow: 0 6px 18px rgba(6,27,97,0.35);
 }
 
-#hero .cta-button {
+/* Estilo global para botões de Call-to-Action (CTA) */
+.botao-cta {
     display: inline-block;
-    background: #ffffff; /* branco */
-    color: #171d73; /* azul */
-    padding: 10px 20px;
+    background: var(--accent); /* azul de destaque */
+    color: var(--white);
+    padding: 12px 26px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px;
     margin-top: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
+    font-weight: 700;
+    transition: background-color 0.22s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    border: none;
+    box-shadow: 0 6px 18px rgba(43,97,209,0.18);
 }
 
-#hero .cta-button:hover {
-    background-color: #f0f0f0;
+.botao-cta:hover,
+.botao-cta:focus {
+    background-color: var(--blue-700);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(43,97,209,0.18);
+}
+
+.botao-cta:focus-visible {
+    outline: 3px solid rgba(91,139,240,0.16);
+    outline-offset: 2px;
 }
 
 /* Seções */
@@ -143,34 +293,51 @@ section h2 {
     color: #171d73; /* azul */
 }
 
-/* Cards de Serviço */
-.service-cards {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
+/* Adiciona uma borda inferior para separar visualmente as seções */
+section:not(#inicio-hero):not(.servico-item) {
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.card {
+section .secao-subtitulo {
+    text-align: center;
+    max-width: 600px;
+    margin: -1.5rem auto 2rem auto;
+}
+/* Cards de Serviço */
+/* .service-cards foi removido da página de serviços, mas pode ser usado em outro lugar. */
+/* O estilo abaixo é para os cards genéricos, como na home. */
+
+.cartao {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 18px rgba(6,27,97,0.06);
     text-align: center;
     flex: 1;
+    border: 2px solid transparent; /* Adiciona uma borda invisível para evitar que o layout "pule" no hover */
 
     /* Estilos para a animação de fade-in */
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transform: translateY(20px); /* Posição inicial para o fade-in */
+    /* Transição suave para todas as propriedades que vamos animar */
+    /* A transição do transform foi ajustada para ser mais rápida no retorno */
+    transition: opacity 0.5s ease-out, transform 0.3s ease-out, box-shadow 0.4s ease-out, border-color 0.4s ease-out;
 }
 
-.card.visible {
+.cartao.visivel {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0); /* Posição final após o fade-in */
+}
+/* Efeito de hover para os cards */
+.cartao:hover {
+    transform: translateY(-6px) scale(1.02);
+    /* Sombra azulada e mais pronunciada para destacar */
+    box-shadow: 0 20px 40px rgba(6,27,97,0.12);
+    border-color: var(--blue-700); /* A borda se torna azul no hover */
 }
 
 /* Estilo para imagens dentro dos cards */
-.card img {
+.cartao img {
     max-width: 80px; /* Tamanho para ícones ou pequenas imagens */
     height: auto;
     margin-bottom: 1rem;
@@ -178,91 +345,530 @@ section h2 {
 }
 
 /* Efeito de hover para as imagens dentro dos cards */
-.card img:hover {
+.cartao img:hover {
     transform: scale(1.1) rotate(5deg); /* Aumenta e rotaciona um pouco */
     filter: drop-shadow(0 0 10px rgba(0,0,0,0.3)); /* Adiciona uma sombra divertida */
 }
 
+/* Estilo para ícones dentro dos cards (substituindo as imagens) */
+.cartao .cartao-icone {
+    font-size: 3rem; /* Tamanho do ícone */
+    color: var(--blue-700); /* Cor azul principal */
+    margin-bottom: 1rem;
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.cartao:hover .cartao-icone {
+    transform: scale(1.08) translateY(-4px);
+    color: var(--accent);
+}
 /* Estilos para a página Sobre */
-#about .about-content {
+#sobre .sobre-conteudo {
     display: flex;
     align-items: center;
     gap: 40px; /* Espaço entre o texto e a imagem */
     text-align: left;
 }
 /* Animação para o conteúdo da página "Sobre" */
-.about-content {
+.sobre-conteudo {
     opacity: 0;
     transition: opacity 0.8s ease-in;
 }
-.about-content.visible {
+.sobre-conteudo.visivel {
     opacity: 1;
 }
 
-#about .about-text {
+#sobre .sobre-texto {
     flex: 1; /* Ocupa o espaço disponível */
 }
 
-#about .about-image {
+#sobre .sobre-imagem {
     flex: 0 0 40%; /* Ocupa 40% da largura, sem crescer ou encolher */
     max-width: 350px; /* Ajusta a largura máxima */
     margin: auto; /* Ajuda a centralizar em telas menores */
 }
 
-#about .about-image img {
+#sobre .sobre-imagem img {
     width: 100%;
     height: 350px; /* Define uma altura fixa para criar um círculo perfeito */
     object-fit: cover; /* Garante que a imagem preencha o círculo sem distorcer */
     border-radius: 50%; /* Transforma a imagem em um círculo */
-    border: 5px solid transparent; /* Adiciona uma borda inicial transparente */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Adiciona transição para todos os efeitos */
+    border: 6px solid rgba(6,27,97,0.06); /* Borda sutil */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; /* Adiciona transição para todos os efeitos */
 }
 
 /* Efeito de hover para a imagem da seção "Sobre" */
-#about .about-image img:hover {
+#sobre .sobre-imagem img:hover {
     transform: scale(1.05); /* Aumenta ligeiramente a imagem */
     box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Adiciona uma sombra mais pronunciada */
     border-color: #171d73; /* A borda se torna azul no hover */
 }
 
+/* Estilos para a seção Missão, Visão e Valores */
+.missao-conteudo {
+    display: flex;
+    gap: 30px;
+    perspective: 1000px; /* Adiciona perspectiva para o efeito 3D */
+    text-align: center;
+}
+
+.missao-item {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    flex: 1;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.missao-item:hover {
+    /* O efeito de inclinação agora é controlado pelo JS */
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(23, 29, 115, 0.2);
+}
+
+.missao-item h3 {
+    color: #171d73;
+    margin-bottom: 10px;
+}
+
+/* ------------------------
+   Novos estilos: Seções coloridas e separadores
+   ------------------------ */
+
+/* Seções com fundo alternado para dar ritmo visual */
+section:nth-of-type(odd):not(#inicio-hero) {
+    background: linear-gradient(180deg, rgba(91,139,240,0.04), rgba(255,255,255,0.02));
+}
+
+section:nth-of-type(even):not(#inicio-hero) {
+    background: linear-gradient(180deg, rgba(6,27,97,0.02), rgba(246,249,255,0.02));
+}
+
+/* Cabeçalho de seção mais marcante */
+section h2 {
+    position: relative;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue-300), var(--blue-500));
+    color: white;
+    box-shadow: 0 8px 24px rgba(43,97,209,0.12);
+}
+
+/* Subtítulo leve sob o h2 */
+section .secao-subtitulo {
+    margin-top: 0.75rem;
+    color: rgba(23,29,115,0.85);
+}
+
+/* Separador diagonal entre seções (pseudo-elemento no container) */
+.section-separator {
+    position: relative;
+}
+.section-separator::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -40px;
+    height: 80px;
+    background: linear-gradient(135deg, transparent 30%, rgba(91,139,240,0.06) 70%);
+    transform: skewY(-4deg);
+    pointer-events: none;
+}
+
+/* Cartões de destaque com variações de cor */
+.cartao-destaque {
+    background: linear-gradient(180deg, var(--white), rgba(91,139,240,0.03));
+    border: 1px solid rgba(91,139,240,0.08);
+    box-shadow: 0 18px 40px rgba(23,29,115,0.06);
+}
+
+.cartao-primario {
+    background: linear-gradient(135deg, var(--blue-300), var(--blue-500));
+    color: white;
+}
+.cartao-primario .cartao-icone { color: rgba(255,255,255,0.9); }
+
+/* Destaque visual para seções de portfólio */
+#portfolio {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 900px) {
+    .container { width: 92%; }
+    header .container img { height: 64px; }
+    #inicio-hero { height: 45vh; }
+    section { padding: 2rem 0; }
+    .missao-conteudo { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+    header nav ul li { display:block; margin: 6px 0; }
+    header nav a { padding: 8px 10px; }
+    #inicio-hero h2 { font-size: 1.6rem; }
+}
+
+/* Pequenas melhorias de acessibilidade */
+a:focus { outline: 2px dashed rgba(91,139,240,0.25); outline-offset: 3px; }
+
+/* ------------------ Overrides finais (importantes) ------------------ */
+/* Garante que os botões do carrossel fiquem acima dos slides/legendas */
+.carrossel .controle-carrossel,
+#inicio-hero .controle-carrossel {
+    z-index: 6;
+}
+
+/* Força os títulos das sections a ficarem centralizados em todos os contextos */
+section {
+    text-align: center; /* centra inline/inline-block children */
+}
+
+/* Se houver contextos em que o título ainda é empurrado por flex, forçamos alinhamento */
+section h2 {
+    display: inline-block !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+}
+
+
+
+.missao-item h3 .fas {
+    color: var(--accent); /* Cor de destaque para os ícones */
+}
+
+/* Estilos para a seção Nossa Equipe */
+.equipe-membros {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    perspective: 1000px; /* Adiciona perspectiva para o efeito 3D */
+    flex-wrap: wrap; /* Permite que os cards quebrem a linha em telas menores */
+}
+
+.equipe-cartao {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 20px;
+    width: 250px;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.equipe-cartao:hover {
+    /* O efeito de inclinação agora é controlado pelo JS */
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(23, 29, 115, 0.25);
+}
+
+.equipe-cartao img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid #171d73;
+}
+
+.equipe-cartao h4 {
+    font-size: 1.2rem;
+    color: #171d73;
+    margin-bottom: 5px;
+}
+
+.equipe-cartao p {
+    font-style: italic;
+}
+
+/* Estilos para a nova página de Serviços */
+.cabecalho-pagina-titulo {
+    background-color: #f4f7fc;
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.cabecalho-pagina-titulo h1 {
+    font-size: 2.5rem;
+    color: #171d73;
+}
+
+.cabecalho-pagina-titulo p {
+    font-size: 1.1rem;
+    color: #605f60;
+}
+
+.lista-secao-servico .servico-item {
+    padding: 4rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.lista-secao-servico .servico-item:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.servico-item-conteudo {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.servico-item.reverso .servico-item-conteudo {
+    flex-direction: row-reverse;
+}
+
+.servico-item .servico-imagem {
+    flex: 1;
+    max-width: 50%;
+}
+
+.servico-item .servico-imagem img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.servico-item .servico-imagem img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.servico-item .servico-descricao {
+    flex: 1;
+    max-width: 50%;
+}
+
+.servico-item .servico-descricao h3 {
+    font-size: 2rem;
+    color: #171d73;
+    margin-bottom: 1rem;
+}
+
+/* Estilos para a seção "Por que nos escolher?" */
+.porque-nos-itens {
+    display: flex;
+    gap: 30px;
+    text-align: left;
+}
+
+.porque-nos-item {
+    background: #f9f9f9;
+    padding: 25px;
+    border-left: 5px solid #8e44ad; /* Cor de destaque na borda */
+    border-radius: 0 8px 8px 0;
+}
+
+.porque-nos-item h3 {
+    color: #171d73; /* Mantém o título azul */
+    margin-bottom: 10px;
+}
+
+.porque-nos-item h3 .fas {
+    margin-right: 10px;
+}
+
+/* Estilos para a seção "Nosso Processo" */
+.processo-passos {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    text-align: center;
+}
+
+.processo-passo {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+}
+
+.processo-passo .processo-icone {
+    font-size: 2.5rem;
+    color: #8e44ad;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.processo-passo .passo-numero {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: #8e44ad; /* Cor de destaque para os números */
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0 auto 15px auto;
+}
+
+.processo-passo h3 {
+    color: #171d73;
+    margin-bottom: 10px;
+}
+
+/* Linhas conectando os passos */
+.processo-passo:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 65px; /* Ajustado para alinhar com o novo ícone */
+    right: -50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 2px;
+    background-color: #ddd;
+    z-index: -1;
+}
+
+/* Estilos para a seção de Depoimentos */
+#depoimentos {
+    background-color: #f4f7fc; /* Um fundo levemente azulado */
+}
+
+.depoimentos-cartoes {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.depoimento-cartao {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    max-width: 400px;
+    text-align: center;
+}
+
+.depoimento-cartao img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.depoimento-cartao p {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: #605f60;
+}
+
+.depoimento-cartao h4 {
+    color: #171d73;
+    font-weight: bold;
+}
+
+/* Estilos para a seção 'Nossos Serviços' */
+#nossos-servicos {
+    padding: 36px 0;
+}
+.servicos-resumo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+    margin-top: 18px;
+}
+.servico-resumo {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(6,27,97,0.06);
+}
+.servico-resumo h3{ color: var(--blue-700); margin-bottom: 8px; }
+.servico-resumo ul{ margin-left: 18px; color: #333; margin-bottom: 10px; }
+.servico-ideal{ font-weight:600; color:var(--blue-500); }
+
+@media (max-width: 900px){
+    .servicos-resumo{ grid-template-columns: 1fr; }
+}
+
+/* Estilos para a página de Blog */
+.blog-postagens {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.blog-cartao-postagem {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden; /* Garante que a imagem não ultrapasse as bordas arredondadas */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-cartao-postagem:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(23, 29, 115, 0.15);
+}
+
+.blog-cartao-postagem img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-conteudo-postagem {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-conteudo-postagem h3 {
+    color: #171d73;
+    font-size: 1.2rem;
+}
+
+.blog-conteudo-postagem p {
+    margin: 10px 0;
+    flex-grow: 1;
+}
+
 /* Estilos para os cartões de resumo na página inicial */
-.summary-cards {
+.resumo-cartoes {
     display: flex;
     justify-content: space-around;
     gap: 20px;
+    perspective: 1000px; /* Adiciona perspectiva para o efeito 3D nos cards filhos */
 }
 
 /* Ajuste para que os cards na página inicial tenham mais conteúdo */
-.card p {
+.cartao p {
     margin-bottom: 1.5rem;
 }
 
-.card .card-link {
+.cartao .cartao-link {
     text-decoration: none;
     font-weight: bold;
     color: #171d73; /* azul */
     transition: color 0.3s ease;
 }
 
-.card .card-link:hover {
+.cartao .cartao-link:hover {
     color: #605f60; /* cinza */
 }
 
 
 /* Rodapé */
 footer {
-    background: #605f60; /* cinza */
-    color: #ffffff; /* branco */
+    background: var(--blue-900);
+    color: var(--white);
     text-align: center;
     padding: 1.5rem 0;
 }
 
 /* Estilos para Redes Sociais no Rodapé */
-.social-media {
+.redes-sociais {
     margin-bottom: 1rem;
 }
 
-.social-media a {
+.redes-sociais a {
     color: #ffffff; /* branco */
     font-size: 1.5rem;
     margin: 0 15px;
@@ -270,33 +876,86 @@ footer {
     transition: color 0.3s ease;
 }
 
-.social-media a:hover {
-    /* Ao passar o mouse, o ícone fica azul para combinar com a identidade visual */
-    color: #171d73; 
+.redes-sociais a:hover {
+    /* Ao passar o mouse, o ícone fica azul claro para combinar com a identidade visual */
+    color: var(--blue-300); /* Cor de destaque no hover */
+    transform: translateY(-3px);
 }
 
+/* ======= Ajustes de layout: Resumo de cards ======= */
+.resumo-cartoes {
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
+    margin-top: 1.5rem;
+}
+
+.resumo-cartoes .cartao {
+    flex: 1 1 0;
+    min-width: 220px;
+}
+
+/* Pequenas melhorias tipográficas */
+h1, h2, h3, h4 {
+    letter-spacing: -0.2px;
+}
+
+/* Microinterações globais */
+* { transition: background-color 0.18s ease, color 0.18s ease; }
+
+/* Foco acessível para elementos interativos */
+a:focus, button:focus, .botao-cta:focus {
+    outline: 3px solid rgba(91,139,240,0.14);
+    outline-offset: 2px;
+}
+
+/* ======= Responsividade ======= */
+@media (max-width: 900px) {
+    .container { width: 92%; }
+    header .container img { height: 64px; }
+    #inicio-hero { height: 50vh; min-height: 320px; }
+    #inicio-hero h2 { font-size: 1.8rem; }
+    .resumo-cartoes { flex-direction: column; }
+    .missao-conteudo, .equipe-membros { flex-direction: column; gap: 18px; }
+}
+
+@media (max-width: 480px) {
+    header nav ul li { display: block; margin: 6px 0; }
+    header nav a { padding: 8px 10px; }
+    .carrossel { border-radius: 6px; }
+    .cartao { padding: 18px; }
+}
+
+/* Ajuste leve no botão do carrossel para dispositivos touch */
+@media (hover: none) and (pointer: coarse) {
+    .controle-carrossel { opacity: 0.9; }
+}
+
+/* Pequena melhora para garantir que o ano no footer seja visível em temas escuros */
+footer p { margin: 0; font-size: 0.95rem; }
+
 /* Estilos para a Seção de Contato */
-#contact {
+#contato {
     padding-bottom: 5rem; /* Mais espaço no final da página de contato */
 }
 
-.contact-info {
+.contato-info {
     text-align: center;
     margin-top: 1rem;
     margin-bottom: 2rem;
 }
 
-.contact-info p {
+.contato-info p {
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
 }
 
-.contact-info strong {
+.contato-info strong {
     color: #171d73; /* azul */
 }
 
 /* Estilos para o Formulário de Contato */
-.contact-form {
+.formulario-contato {
     max-width: 600px;
     margin: 2rem auto;
     padding: 30px;
@@ -305,20 +964,20 @@ footer {
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.contact-form .form-group {
+.formulario-contato .grupo-formulario {
     margin-bottom: 20px;
 }
 
-.contact-form label {
+.formulario-contato label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
     color: #171d73; /* azul */
 }
 
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
+.formulario-contato input[type="text"],
+.formulario-contato input[type="email"],
+.formulario-contato textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -327,70 +986,129 @@ footer {
     transition: border-color 0.3s ease;
 }
 
-.contact-form input[type="text"]:focus,
-.contact-form input[type="email"]:focus,
-.contact-form textarea:focus {
+.formulario-contato input[type="text"]:focus,
+.formulario-contato input[type="email"]:focus,
+.formulario-contato textarea:focus {
     border-color: #171d73; /* azul */
     outline: none;
 }
 
-.contact-form textarea {
+.formulario-contato textarea {
     resize: vertical; /* Permite redimensionar verticalmente */
     min-height: 120px;
 }
 
-.contact-form .cta-button {
-    width: auto; /* Ajusta a largura do botão para o conteúdo */
-    display: block; /* Garante que o botão ocupe sua própria linha */
-    margin: 20px auto 0 auto; /* Centraliza o botão e adiciona margem superior */
-}
-
-/* Estilos para o Carrossel de Portfólio */
-.carousel {
+/* Estilos para o Carrossel de Portfólio - visual moderno e elegante */
+.carrossel {
     position: relative;
-    max-width: 900px;
-    margin: auto;
+    max-width: 1000px;
+    margin: 2rem auto;
+    overflow: visible; /* permitimos sombras das setas */
+    border-radius: 12px;
+}
+
+.carrossel-inner-wrap {
+    position: relative;
     overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(6,27,97,0.06);
 }
 
-.carousel-inner {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-    min-width: 100%;
-    box-sizing: border-box;
-    display: none; /* Esconde por padrão */
-}
-
-.carousel-item.active {
-    display: block; /* Mostra o item ativo */
-}
-
-.carousel-item img {
+.carrossel-interno {
+    position: relative;
     width: 100%;
-    display: block;
-    height: auto;
+    height: 100%;
 }
 
-.carousel-control {
+.carrossel-item {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease, transform 0.6s ease;
+    transform: scale(0.995);
+}
+
+.carrossel-item.ativo {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+    transform: scale(1);
+}
+
+.carrossel-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Setas maiores e com sombra */
+.controle-carrossel {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(23, 29, 115, 0.5); /* Azul semitransparente */
-    color: white;
+    background-color: rgba(23,29,115,0.85);
+    color: #fff;
     border: none;
-    padding: 10px 15px;
-    font-size: 1.5rem;
+    padding: 12px 16px;
+    font-size: 1.25rem;
     cursor: pointer;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(6,27,97,0.25);
+    transition: transform 0.18s ease, background-color 0.18s ease;
+    z-index: 5;
 }
 
-.carousel-control.prev { left: 15px; }
-.carousel-control.next { right: 15px; }
+.controle-carrossel:hover { transform: translateY(-50%) scale(1.06); background-color: var(--blue-700); }
+.controle-carrossel.prev { left: 12px; }
+.controle-carrossel.next { right: 12px; }
 
-.carousel-control:hover { background-color: #171d73; } /* Azul sólido no hover */
+/* Dots (paginacao) */
+.carrossel-dots {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+}
+.carrossel-dots button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(6,27,97,0.18);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.carrossel-dots button.ativo { background: var(--blue-500); transform: scale(1.2); }
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .carrossel { margin: 1.2rem auto; }
+    .controle-carrossel { padding: 10px 12px; font-size: 1.1rem; }
+}
+
+/* Título principal sobre a imagem do carrossel */
+.carrossel-main-title{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white);
+    background: linear-gradient(180deg, rgba(6,27,97,0.18), rgba(6,27,97,0.28));
+    padding: 14px 22px;
+    border-radius: 8px;
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(6,27,97,0.18);
+    backdrop-filter: blur(4px);
+    z-index: 6;
+}
+
+/* Fallback: esconder legendas internas caso existam */
+.carrossel .carrossel-legenda, .carrossel .legenda, .carrossel .caption{ display: none !important; }
+

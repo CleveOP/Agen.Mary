@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./style.css">
-    <title>Contato - MS Criações</title>
+    <title>Blog - MS Criações</title>
 </head>
 <body>
     <header>
@@ -50,29 +50,35 @@
     </header>
 
     <main>
-        <section id="contato" class="container">
-            <h2>Entre em Contato</h2>
-            <p>Estamos ansiosos para ouvir sobre o seu projeto! Preencha o formulário abaixo ou utilize nossos contatos diretos.</p>
-            <div class="contato-info">
-                <p><strong>Email:</strong> contato@mscriações.com.br</p>
-                <p><strong>Telefone:</strong> (XX) XXXX-XXXX</p>
-                <p><strong>Endereço:</strong> Rua Exemplo, 123, Cidade, Estado</p>
+        <section id="listagem-blog" class="container">
+            <h2>Nosso Blog</h2>
+            <p class="secao-subtitulo">Dicas, tendências e insights sobre o universo do marketing digital e design.</p>
+            <div class="blog-postagens">
+                <article class="blog-cartao-postagem">
+                    <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23f6fbff'/%3E%3Ctext x='50%25' y='45%25' font-family='Poppins,Arial,sans-serif' font-size='18' fill='%2316307f' text-anchor='middle'%3EBranding%20Essencial%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Poppins,Arial,sans-serif' font-size='12' fill='%234a5790' text-anchor='middle'%3EDicas%20e%20t%C3%A9cnicas%3C/text%3E%3C/svg%3E" alt="Imagem do post sobre branding">
+                    <div class="blog-conteudo-postagem">
+                        <h3>5 Dicas Essenciais para um Branding de Sucesso</h3>
+                        <p>Descubra como construir uma marca forte e memorável que se conecta com seu público-alvo...</p>
+                        <a href="#" class="cartao-link">Leia Mais &rarr;</a>
+                    </div>
+                </article>
+                <article class="blog-cartao-postagem">
+                    <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23f6fbff'/%3E%3Ctext x='50%25' y='45%25' font-family='Poppins,Arial,sans-serif' font-size='18' fill='%2316307f' text-anchor='middle'%3ESEO%20para%20Iniciantes%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Poppins,Arial,sans-serif' font-size='12' fill='%234a5790' text-anchor='middle'%3EOtimize%20seu%20site%3C/text%3E%3C/svg%3E" alt="Imagem do post sobre SEO">
+                    <div class="blog-conteudo-postagem">
+                        <h3>SEO para Iniciantes: Como Colocar seu Site no Google</h3>
+                        <p>Entenda os conceitos básicos de SEO e comece a otimizar seu site para os motores de busca hoje mesmo...</p>
+                        <a href="#" class="cartao-link">Leia Mais &rarr;</a>
+                    </div>
+                </article>
+                <article class="blog-cartao-postagem">
+                    <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='100%25' height='100%25' fill='%23f6fbff'/%3E%3Ctext x='50%25' y='45%25' font-family='Poppins,Arial,sans-serif' font-size='18' fill='%2316307f' text-anchor='middle'%3EO%20Poder%20do%20V%C3%ADdeo%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Poppins,Arial,sans-serif' font-size='12' fill='%234a5790' text-anchor='middle'%3EEngajamento%20e%20formatos%3C/text%3E%3C/svg%3E" alt="Imagem do post sobre redes sociais">
+                    <div class="blog-conteudo-postagem">
+                        <h3>O Poder do Conteúdo em Vídeo nas Redes Sociais</h3>
+                        <p>Saiba por que os vídeos são a ferramenta mais poderosa para engajamento e como começar a produzi-los...</p>
+                        <a href="#" class="cartao-link">Leia Mais &rarr;</a>
+                    </div>
+                </article>
             </div>
-            <form class="formulario-contato">
-                <div class="grupo-formulario">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="grupo-formulario">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="grupo-formulario">
-                    <label for="message">Mensagem:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="botao-cta">Enviar Mensagem</button>
-            </form>
         </section>
     </main>
 
@@ -86,10 +92,6 @@
         <p>&copy; <span id="current-year"></span> MS Criações. Todos os direitos reservados.</p>
     </footer>
 
-    <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
-    <!-- Incluindo nosso arquivo JavaScript principal -->
     <script src="main.js" defer></script>
 </body>
 </html>

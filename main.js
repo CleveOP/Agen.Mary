@@ -1,70 +1,122 @@
-// --- 1. Lógica para destacar o link do menu da página ativa ---
+// main.js — Versão limpa e corrigida
+// main.js — Versão limpa e corrigida
+(function () {
+    // --- Utils
+    const qs = s => document.querySelector(s);
+    const qsa = s => Array.from(document.querySelectorAll(s));
 
-// Pega o caminho da página atual (ex: "/services.html")
-const currentPage = window.location.pathname;
-
-// Seleciona todos os links dentro da navegação do cabeçalho
-const navLinks = document.querySelectorAll('header nav a');
-
-// Itera sobre cada link do menu
-navLinks.forEach(link => {
-    // Verifica se o href do link corresponde à página atual
-    if (link.getAttribute('href').endsWith(currentPage.substring(currentPage.lastIndexOf('/')))) {
-        // Adiciona a classe 'active' ao link correspondente
-        link.classList.add('active');
-    }
-});
-
-
-// --- 2. Lógica para animação de fade-in ao rolar a página ---
-
-// Seleciona todos os elementos que queremos animar
-const elementsToAnimate = document.querySelectorAll('.card, .about-content');
-
-// Configura o "observador" que vai verificar quando um elemento entra na tela
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        // Se o elemento está visível na tela
-        if (entry.isIntersecting) {
-            // Adiciona a classe 'visible' para ativar a animação
-            entry.target.classList.add('visible');
-            // Para a observação deste elemento para não repetir a animação
-            observer.unobserve(entry.target);
+    // Destacar link ativo no menu
+    (function highlightActiveLink() {
+        const navLinks = qsa('header nav a');
+        const currentPath = window.location.pathname.split('/').pop();
+        function normalizeHref(href) {
+            if (!href) return '';
+            return href.split('/').pop().split('#')[0].split('?')[0];
         }
-    });
-}, { threshold: 0.1 }); // A animação começa quando 10% do elemento estiver visível
+        navLinks.forEach(link => {
+            const href = normalizeHref(link.getAttribute('href'));
+            if (href === currentPath || (href === '' && currentPath === '')) link.classList.add('ativo');
+            // main.js — Versão limpa e corrigida
+            (function () {
+                // --- Utils
+                const qs = s => document.querySelector(s);
+                const qsa = s => Array.from(document.querySelectorAll(s));
 
-// Pede ao observador para "vigiar" cada um dos elementos selecionados
-elementsToAnimate.forEach(element => observer.observe(element));
+                // Destacar link ativo no menu
+                (function highlightActiveLink() {
+                    const navLinks = qsa('header nav a');
+                    const currentPath = window.location.pathname.split('/').pop();
+                    function normalizeHref(href) { if (!href) return ''; return href.split('/').pop().split('#')[0].split('?')[0]; }
+                    navLinks.forEach(link => {
+                        const href = normalizeHref(link.getAttribute('href'));
+                        if (href === currentPath || (href === '' && currentPath === '')) link.classList.add('ativo');
+                    });
+                })();
 
+                // Observer para revelar elementos ao rolar
+                (function setupObserver() {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visivel'); });
+                    }, { threshold: 0.18 });
+                    qsa('.cartao, .sobre-conteudo, .servico-item').forEach(el => observer.observe(el));
+                })();
 
-// --- 3. Lógica para o Carrossel ---
+                // Carrossel: apenas imagem + título principal, com autoplay e dots
+                (function elegantCarousel() {
+                    qsa('.carrossel').forEach(carrossel => {
+                        // garantir wrapper
+                        let wrap = carrossel.querySelector('.carrossel-inner-wrap');
+                        const interno = carrossel.querySelector('.carrossel-interno');
+                        if (!interno) return;
+                        if (!wrap) { wrap = document.createElement('div'); wrap.className = 'carrossel-inner-wrap'; carrossel.insertBefore(wrap, interno); wrap.appendChild(interno); }
 
-// Verifica se existe um carrossel na página antes de executar o código
-const carousel = document.querySelector('.carousel');
-if (carousel) {
-    const carouselInner = carousel.querySelector('.carousel-inner');
-    const carouselItems = carousel.querySelectorAll('.carousel-item');
-    const prevButton = carousel.querySelector('.carousel-control.prev');
-    const nextButton = carousel.querySelector('.carousel-control.next');
-    let currentIndex = 0;
+                        const itens = Array.from(interno.querySelectorAll('.carrossel-item'));
+                        const prev = carrossel.querySelector('.controle-carrossel.prev');
+                        const next = carrossel.querySelector('.controle-carrossel.next');
 
-    function showSlide(index) {
-        // Esconde todos os slides
-        carouselItems.forEach(item => item.classList.remove('active'));
-        // Mostra o slide correto
-        carouselItems[index].classList.add('active');
-        // Move o container (para animação de slide, se usada)
-        carouselInner.style.transform = `translateX(-${index * 100}%)`;
-    }
+                        // esconder legendas internas (se existirem) e coletar título principal
+                        const titles = itens.map(it => {
+                            const caption = it.querySelector('.carrossel-legenda, .legenda, .caption');
+                            if (caption) caption.style.display = 'none';
+                            const title = (it.dataset.title && it.dataset.title.trim()) || (it.querySelector('h1,h2,h3,.titulo')?.textContent || '').trim();
+                            return title;
+                        });
 
-    nextButton.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % carouselItems.length;
-        showSlide(currentIndex);
-    });
+                        // criar dots
+                        const dotsWrap = document.createElement('div'); dotsWrap.className = 'carrossel-dots';
+                        const dots = [];
+                        itens.forEach((it, i) => { const btn = document.createElement('button'); btn.type = 'button'; if (i === 0) btn.classList.add('ativo'); btn.addEventListener('click', () => showSlide(i)); dotsWrap.appendChild(btn); dots.push(btn); });
+                        carrossel.appendChild(dotsWrap);
 
-    prevButton.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-        showSlide(currentIndex);
-    });
-}
+                        // criar elemento de título principal sobreposto
+                        let titleEl = carrossel.querySelector('.carrossel-main-title');
+                        if (!titleEl) { titleEl = document.createElement('div'); titleEl.className = 'carrossel-main-title'; wrap.appendChild(titleEl); }
+
+                        let currentIndex = 0; let autoplayId = null; const AUTOPLAY_DELAY = 4500;
+
+                        function updateTitle(i) { const t = titles[i] || ''; titleEl.textContent = t; titleEl.style.display = t ? 'block' : 'none'; }
+
+                        function showSlide(i) { currentIndex = (i + itens.length) % itens.length; itens.forEach((it, idx) => it.classList.toggle('ativo', idx === currentIndex)); dots.forEach((d, idx) => d.classList.toggle('ativo', idx === currentIndex)); updateTitle(currentIndex); }
+
+                        function nextSlide() { showSlide(currentIndex + 1); }
+                        function prevSlide() { showSlide(currentIndex - 1); }
+
+                        if (next) next.addEventListener('click', () => { nextSlide(); restartAutoplay(); });
+                        if (prev) prev.addEventListener('click', () => { prevSlide(); restartAutoplay(); });
+
+                        function startAutoplay() { stopAutoplay(); autoplayId = setInterval(nextSlide, AUTOPLAY_DELAY); }
+                        function stopAutoplay() { if (autoplayId) { clearInterval(autoplayId); autoplayId = null; } }
+                        function restartAutoplay() { stopAutoplay(); startAutoplay(); }
+
+                        wrap.addEventListener('mouseenter', stopAutoplay); wrap.addEventListener('mouseleave', startAutoplay);
+
+                        // iniciar
+                        showSlide(0); startAutoplay();
+                    });
+                })();
+
+                // Efeito 3D nos cards (suave)
+                (function card3DEffect() {
+                    const maxRotation = 8; // graus
+                    qsa('.cartao').forEach(card => {
+                        card.style.willChange = 'transform';
+                        card.addEventListener('mousemove', (e) => {
+                            const rect = card.getBoundingClientRect();
+                            const x = (e.clientX - rect.left) / rect.width - 0.5;
+                            const y = (e.clientY - rect.top) / rect.height - 0.5;
+                            const ry = (x * maxRotation).toFixed(2);
+                            const rx = (-y * maxRotation).toFixed(2);
+                            card.style.transform = `rotateY(${ry}deg) rotateX(${rx}deg) translateZ(0)`;
+                        });
+                        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+                    });
+                })();
+
+            })();
+            function stopAutoplay() { if (autoplayId) { clearInterval(autoplayId); autoplayId = null; } }
+
+            function restartAutoplay() { stopAutoplay(); startAutoplay(); }
+
+        });
+    })();
+})();
