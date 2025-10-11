@@ -22,6 +22,9 @@ html, body {
     --surface: #f6f9ff;
     --muted: #f0f3fa;
     --accent: var(--blue-500);
+    --blue-300-rgb: 91, 139, 240;
+    --blue-500-rgb: 43, 97, 209;
+    --blue-700-rgb: 22, 48, 127;
 }
 
 body {
@@ -32,6 +35,7 @@ body {
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
 }
+
 
 
 .container {
@@ -53,14 +57,14 @@ header .container {
 
 /* Cabeçalho */
 header {
-    background: var(--blue-900);
+    background: rgba(6, 27, 97, 0.8); /* Fundo semitransparente */
     color: var(--white);
     padding: 0.85rem 0;
     border-bottom: 1px solid rgba(255,255,255,0.06);
     position: sticky;
     top: 0;
     z-index: 1000;
-    backdrop-filter: saturate(120%) blur(4px);
+    backdrop-filter: saturate(120%) blur(10px); /* Efeito de vidro */
 }
 
 header .container {
@@ -77,23 +81,14 @@ header .container {
 }
 
 /* Estilo para a imagem/logo no cabeçalho */
-header .container img {
-    height: 80px; /* Dimensão mais elegante e proporcional */
-    width: auto;  /* Mantém a proporção correta */
-    margin-right: 12px;
-    border: 2px solid rgba(255,255,255,0.06);
-    border-radius: 12px; /* canto arredondado sutil */
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+header .container .logo-link img {
+    height: 45px; /* Define uma altura para o logo */
+    margin-right: 12px; /* Espaço entre a imagem e o texto */
+    border-radius: 50%; /* Deixa a imagem do logo redonda */
 }
 
-/* Efeito de hover para o logo */
-header .container img:hover {
-    transform: scale(1.05); /* Aumenta ligeiramente o tamanho ao passar o mouse */
-}
-
-header .logo {
-    font-weight: bold;
-    color: #ffffff; /* branco */
+header .logo { /* Estilo para o texto "MS Criações" */
+    color: var(--white);
 }
 
 header nav ul {
@@ -150,7 +145,7 @@ header nav ul li.menu-suspenso .fa-chevron-down {
     position: absolute;
     top: 100%; /* Posiciona logo abaixo do item pai */
     left: 0;
-    background-color: var(--blue-700); /* Mesmo tom do cabeçalho, mas levemente diferente */
+    background-color: rgba(22, 48, 127, 0.9); /* Fundo do dropdown semitransparente */
     box-shadow: 0 10px 30px rgba(6,27,97,0.12);
     border-radius: 0 0 8px 8px; /* Bordas arredondadas apenas na parte inferior */
     list-style: none;
@@ -283,13 +278,13 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
 
 /* Seções */
 section {
-    padding: 3rem 0;
+    padding: 5.5rem 0;
 }
 
 section h2 {
     text-align: center;
-    margin-bottom: 2rem;
     font-size: 2rem;
+    margin-bottom: 1.5rem;
     color: #171d73; /* azul */
 }
 
@@ -301,21 +296,22 @@ section:not(#inicio-hero):not(.servico-item) {
 section .secao-subtitulo {
     text-align: center;
     max-width: 600px;
-    margin: -1.5rem auto 2rem auto;
+    margin: 1.5rem auto 4.5rem auto;
 }
 /* Cards de Serviço */
 /* .service-cards foi removido da página de serviços, mas pode ser usado em outro lugar. */
 /* O estilo abaixo é para os cards genéricos, como na home. */
 
 .cartao {
-    background: #fff;
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
+    backdrop-filter: blur(10px);
+    padding: 25px;
     border-radius: 8px;
     box-shadow: 0 6px 18px rgba(6,27,97,0.06);
     text-align: center;
     flex: 1;
-    border: 2px solid transparent; /* Adiciona uma borda invisível para evitar que o layout "pule" no hover */
-
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borda de vidro */
+ 
     /* Estilos para a animação de fade-in */
     opacity: 0;
     transform: translateY(20px); /* Posição inicial para o fade-in */
@@ -333,7 +329,7 @@ section .secao-subtitulo {
     transform: translateY(-6px) scale(1.02);
     /* Sombra azulada e mais pronunciada para destacar */
     box-shadow: 0 20px 40px rgba(6,27,97,0.12);
-    border-color: var(--blue-700); /* A borda se torna azul no hover */
+    border-color: rgba(43, 97, 209, 0.5); /* Borda azul semitransparente */
 }
 
 /* Estilo para imagens dentro dos cards */
@@ -413,14 +409,16 @@ section .secao-subtitulo {
 }
 
 .missao-item {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
+    backdrop-filter: blur(10px);
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 6px 18px rgba(6,27,97,0.06);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     flex: 1;
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
-
+ 
 .missao-item:hover {
     /* O efeito de inclinação agora é controlado pelo JS */
     transform: translateY(-5px) scale(1.02);
@@ -429,7 +427,7 @@ section .secao-subtitulo {
 
 .missao-item h3 {
     color: #171d73;
-    margin-bottom: 10px;
+    margin-bottom: 1.25rem;
 }
 
 /* ------------------------
@@ -438,11 +436,11 @@ section .secao-subtitulo {
 
 /* Seções com fundo alternado para dar ritmo visual */
 section:nth-of-type(odd):not(#inicio-hero) {
-    background: linear-gradient(180deg, rgba(91,139,240,0.04), rgba(255,255,255,0.02));
+    background: transparent;
 }
 
 section:nth-of-type(even):not(#inicio-hero) {
-    background: linear-gradient(180deg, rgba(6,27,97,0.02), rgba(246,249,255,0.02));
+    background: transparent;
 }
 
 /* Cabeçalho de seção mais marcante */
@@ -458,8 +456,121 @@ section h2 {
 
 /* Subtítulo leve sob o h2 */
 section .secao-subtitulo {
-    margin-top: 0.75rem;
+    margin-top: 1.5rem;
     color: rgba(23,29,115,0.85);
+}
+
+/* --- Animação de Círculos no Fundo --- */
+.background-circles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Coloca os círculos atrás de todo o conteúdo */
+}
+
+.background-circles span {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(var(--blue-500-rgb), 0.25);
+    animation: animate-circles 25s linear infinite;
+    bottom: -150px; /* Começam fora da tela, na parte de baixo */
+    border-radius: 50%;
+}
+
+.background-circles span:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+.background-circles span:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.background-circles span:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.background-circles span:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.background-circles span:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.background-circles span:nth-child(6) {
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+    background: rgba(var(--blue-700-rgb), 0.2);
+}
+
+.background-circles span:nth-child(7) {
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.background-circles span:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.background-circles span:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+    background: rgba(var(--blue-700-rgb), 0.25);
+}
+
+.background-circles span:nth-child(10) {
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+@keyframes animate-circles {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
 }
 
 /* Separador diagonal entre seções (pseudo-elemento no container) */
@@ -498,6 +609,39 @@ section .secao-subtitulo {
 }
 
 /* Ajustes responsivos */
+
+/* Ajustes para o layout das mini-seções */
+.servico-item-conteudo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: center;
+}
+.servico-imagem img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(6,27,97,0.06);
+}
+
+/* Reverso alterna a ordem para variedade visual */
+.servico-item.reverso .servico-item-conteudo {
+    /* A ordem das colunas é alterada para o layout reverso */
+    grid-template-areas: "descricao imagem";
+}
+
+/* Mobile: empilhar conteúdos */
+@media (max-width: 840px) {
+    .container { width: 92%; }
+    .servico-item-conteudo,
+    .servico-item.reverso .servico-item-conteudo {
+        grid-template-columns: 1fr; /* Força uma única coluna */
+        grid-template-areas: "imagem" "descricao"; /* Garante que a imagem venha sempre primeiro */
+    }
+    .servico-imagem { order: 0; }
+    .servico-descricao { order: 1; }
+    .servico-list li::before { left: 6px; top: 0.9rem; }
+}
 @media (max-width: 900px) {
     .container { width: 92%; }
     header .container img { height: 64px; }
@@ -524,17 +668,13 @@ a:focus { outline: 2px dashed rgba(91,139,240,0.25); outline-offset: 3px; }
 
 /* Força os títulos das sections a ficarem centralizados em todos os contextos */
 section {
-    text-align: center; /* centra inline/inline-block children */
+    text-align: center;
 }
 
-/* Se houver contextos em que o título ainda é empurrado por flex, forçamos alinhamento */
+/* Ajuste para garantir que o título da seção tenha margem inferior e centralização */
 section h2 {
-    display: inline-block !important;
-    margin: 0 auto !important;
-    text-align: center !important;
+    margin-bottom: 3rem !important;
 }
-
-
 
 .missao-item h3 .fas {
     color: var(--accent); /* Cor de destaque para os ícones */
@@ -550,9 +690,10 @@ section h2 {
 }
 
 .equipe-cartao {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
+    backdrop-filter: blur(10px);
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 18px rgba(6,27,97,0.06);
     text-align: center;
     padding: 20px;
     width: 250px;
@@ -586,9 +727,9 @@ section h2 {
 
 /* Estilos para a nova página de Serviços */
 .cabecalho-pagina-titulo {
-    background-color: #f4f7fc;
+    background-color: transparent;
     text-align: center;
-    padding: 3rem 0;
+    padding: 5.5rem 0;
 }
 
 .cabecalho-pagina-titulo h1 {
@@ -598,16 +739,18 @@ section h2 {
 
 .cabecalho-pagina-titulo p {
     font-size: 1.1rem;
+    max-width: 600px;
+    margin: 1rem auto 0 auto;
     color: #605f60;
 }
 
 .lista-secao-servico .servico-item {
-    padding: 4rem 0;
+    padding: 5.5rem 0;
     border-bottom: 1px solid #e0e0e0;
 }
 
 .lista-secao-servico .servico-item:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: transparent;
 }
 
 .servico-item-conteudo {
@@ -645,7 +788,11 @@ section h2 {
 .servico-item .servico-descricao h3 {
     font-size: 2rem;
     color: #171d73;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.servico-item .servico-descricao p {
+    margin-bottom: 2rem;
 }
 
 /* Estilos para a seção "Por que nos escolher?" */
@@ -656,7 +803,7 @@ section h2 {
 }
 
 .porque-nos-item {
-    background: #f9f9f9;
+    background: transparent;
     padding: 25px;
     border-left: 5px solid #8e44ad; /* Cor de destaque na borda */
     border-radius: 0 8px 8px 0;
@@ -706,7 +853,7 @@ section h2 {
 
 .processo-passo h3 {
     color: #171d73;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 
 /* Linhas conectando os passos */
@@ -724,7 +871,7 @@ section h2 {
 
 /* Estilos para a seção de Depoimentos */
 #depoimentos {
-    background-color: #f4f7fc; /* Um fundo levemente azulado */
+    background-color: transparent;
 }
 
 .depoimentos-cartoes {
@@ -734,10 +881,12 @@ section h2 {
 }
 
 .depoimento-cartao {
-    background: #fff;
-    padding: 30px;
+    background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
+    backdrop-filter: blur(10px);
+    padding: 35px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 18px rgba(6,27,97,0.06);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     max-width: 400px;
     text-align: center;
 }
@@ -746,14 +895,11 @@ section h2 {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
+    object-fit: cover;    margin-bottom: 1.5rem;
 }
 
 .depoimento-cartao p {
-    font-style: italic;
     margin-bottom: 15px;
-    color: #605f60;
 }
 
 .depoimento-cartao h4 {
@@ -772,30 +918,39 @@ section h2 {
     margin-top: 18px;
 }
 .servico-resumo {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 6px 18px rgba(6,27,97,0.06);
 }
 .servico-resumo h3{ color: var(--blue-700); margin-bottom: 8px; }
 .servico-resumo ul{ margin-left: 18px; color: #333; margin-bottom: 10px; }
-.servico-ideal{ font-weight:600; color:var(--blue-500); }
-
-@media (max-width: 900px){
-    .servicos-resumo{ grid-template-columns: 1fr; }
+.servico-list li::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--blue-500);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: -10px;
+    top: 0.6rem;
+    transform: translateY(-50%);
 }
-
-/* Estilos para a página de Blog */
-.blog-postagens {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+.servico-list li {
+    padding-left: 0.5rem;
+    position: relative;
+    color: rgba(23,29,115,0.75);
 }
 
 .blog-cartao-postagem {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
+    backdrop-filter: blur(10px);
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 18px rgba(6,27,97,0.06);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden; /* Garante que a imagem não ultrapasse as bordas arredondadas */
     display: flex;
     flex-direction: column;
@@ -822,11 +977,11 @@ section h2 {
 
 .blog-conteudo-postagem h3 {
     color: #171d73;
-    font-size: 1.2rem;
+    font-size: 1.3rem;    margin-bottom: 1rem;
 }
 
 .blog-conteudo-postagem p {
-    margin: 10px 0;
+    margin: 1.25rem 0;
     flex-grow: 1;
 }
 
@@ -857,7 +1012,7 @@ section h2 {
 
 /* Rodapé */
 footer {
-    background: var(--blue-900);
+    background: rgba(6, 27, 97, 0.8); /* Fundo semitransparente */
     color: var(--white);
     text-align: center;
     padding: 1.5rem 0;
@@ -959,9 +1114,11 @@ footer p { margin: 0; font-size: 0.95rem; }
     max-width: 600px;
     margin: 2rem auto;
     padding: 30px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
+    backdrop-filter: blur(10px);
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 6px 18px rgba(6,27,97,0.06);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .formulario-contato .grupo-formulario {
@@ -1112,3 +1269,23 @@ footer p { margin: 0; font-size: 0.95rem; }
 /* Fallback: esconder legendas internas caso existam */
 .carrossel .carrossel-legenda, .carrossel .legenda, .carrossel .caption{ display: none !important; }
 
+/* --- Estilos para a seção da Fundadora --- */
+#fundadora {
+    background-color: #fdfdff; /* Fundo muito sutil para destacar */
+}
+
+#fundadora blockquote {
+    max-width: 850px;
+    margin: 0 auto; /* A margem superior agora é controlada pelo h2 */
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
+    backdrop-filter: blur(10px);
+    border-left: 5px solid var(--accent);
+    box-shadow: 0 8px 30px rgba(6,27,97,0.07);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#fundadora blockquote p:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
