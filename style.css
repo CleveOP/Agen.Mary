@@ -33,7 +33,8 @@ body {
     color: var(--gray-600); /* cinza para o texto principal */
     line-height: 1.6;
     -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+    -moz-osx-font-smoothing:grayscale;    
+    cursor: none; /* Esconde o cursor padrão */
 }
 
 
@@ -53,6 +54,11 @@ body {
 /* para permitir que o menu dropdown seja exibido corretamente. */
 header .container {
     overflow: visible;
+}
+
+/* Esconde o cursor padrão em elementos clicáveis */
+a, button, .botao-cta {
+    cursor: none;
 }
 
 /* Cabeçalho */
@@ -82,13 +88,40 @@ header .container {
 
 /* Estilo para a imagem/logo no cabeçalho */
 header .container .logo-link img {
-    height: 45px; /* Define uma altura para o logo */
+    height: 100px; /* Define uma altura para o logo */
     margin-right: 12px; /* Espaço entre a imagem e o texto */
     border-radius: 50%; /* Deixa a imagem do logo redonda */
 }
 
 header .logo { /* Estilo para o texto "MS Criações" */
     color: var(--white);
+    transition: color 0.3s ease, text-shadow 0.3s ease;    
+    position: relative; /* Necessário para posicionar a linha abaixo */
+    padding-bottom: 5px; /* Cria um pequeno espaço para a linha */
+}
+
+/* A linha animada */
+header .logo::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0); /* Começa invisível (escala 0) */
+    transform-origin: center; /* A animação acontece a partir do centro */
+    transition: transform 0.4s ease-out; /* Animação suave */
+}
+
+.logo-link:hover .logo {
+    color: var(--white);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Efeito de brilho branco */
+}
+
+/* Expande a linha no hover */
+.logo-link:hover .logo::after {
+    transform: scaleX(1); /* Expande a linha para 100% da largura */
 }
 
 header nav ul {
@@ -197,10 +230,11 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
 
 #inicio-hero .carrossel-item img {
     height: 100%;
-    object-fit: cover; /* Garante que a imagem cubra todo o espaço sem distorcer */
-    filter: brightness(0.6); /* Deixa a imagem um pouco mais clara */
+    width: 100%; /* Garante que a imagem ocupe a largura total */
+    object-fit: contain;
+    border-radius: 12px; /* Adiciona bordas arredondadas */
 }
-
+    
 #inicio-hero .carrossel-legenda {
     position: absolute;
     top: 50%;
@@ -288,11 +322,6 @@ section h2 {
     color: #171d73; /* azul */
 }
 
-/* Adiciona uma borda inferior para separar visualmente as seções */
-section:not(#inicio-hero):not(.servico-item) {
-    border-bottom: 1px solid #e0e0e0;
-}
-
 section .secao-subtitulo {
     text-align: center;
     max-width: 600px;
@@ -330,6 +359,24 @@ section .secao-subtitulo {
     /* Sombra azulada e mais pronunciada para destacar */
     box-shadow: 0 20px 40px rgba(6,27,97,0.12);
     border-color: rgba(43, 97, 209, 0.5); /* Borda azul semitransparente */
+}
+
+/* Número do passo dentro do card de processo */
+.cartao .cartao-numero {
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(43, 97, 209, 0.3);
 }
 
 /* Estilo para imagens dentro dos cards */
@@ -387,7 +434,7 @@ section .secao-subtitulo {
 #sobre .sobre-imagem img {
     width: 100%;
     height: 350px; /* Define uma altura fixa para criar um círculo perfeito */
-    object-fit: cover; /* Garante que a imagem preencha o círculo sem distorcer */
+    object-fit: cover;
     border-radius: 50%; /* Transforma a imagem em um círculo */
     border: 6px solid rgba(6,27,97,0.06); /* Borda sutil */
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; /* Adiciona transição para todos os efeitos */
@@ -435,15 +482,15 @@ section .secao-subtitulo {
    ------------------------ */
 
 /* Seções com fundo alternado para dar ritmo visual */
-section:nth-of-type(odd):not(#inicio-hero) {
-    background: transparent;
-}
-
-section:nth-of-type(even):not(#inicio-hero) {
-    background: transparent;
+section:not(#inicio-hero) {
+    background: rgba(246, 249, 255, 0.6); /* Cor --surface com 60% de opacidade */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Cabeçalho de seção mais marcante */
+/* O estilo do h2 foi movido para baixo para garantir a sobreposição correta */
 section h2 {
     position: relative;
     display: inline-block;
@@ -477,7 +524,9 @@ section .secao-subtitulo {
     list-style: none;
     width: 20px;
     height: 20px;
-    background: rgba(var(--blue-500-rgb), 0.25);
+    background-image: url('./img/LogoMsCriacoes.png');
+    background-size: cover;
+    opacity: 0.15; /* Opacidade para o efeito sutil */
     animation: animate-circles 25s linear infinite;
     bottom: -150px; /* Começam fora da tela, na parte de baixo */
     border-radius: 50%;
@@ -525,7 +574,7 @@ section .secao-subtitulo {
     width: 110px;
     height: 110px;
     animation-delay: 3s;
-    background: rgba(var(--blue-700-rgb), 0.2);
+    opacity: 0.1; /* Um pouco mais sutil para os maiores */
 }
 
 .background-circles span:nth-child(7) {
@@ -549,7 +598,7 @@ section .secao-subtitulo {
     height: 15px;
     animation-delay: 2s;
     animation-duration: 35s;
-    background: rgba(var(--blue-700-rgb), 0.25);
+    opacity: 0.2;
 }
 
 .background-circles span:nth-child(10) {
@@ -727,7 +776,7 @@ section h2 {
 
 /* Estilos para a nova página de Serviços */
 .cabecalho-pagina-titulo {
-    background-color: transparent;
+    background-color: rgba(246, 249, 255, 0.6); /* Cor --surface com 60% de opacidade */
     text-align: center;
     padding: 5.5rem 0;
 }
@@ -746,11 +795,7 @@ section h2 {
 
 .lista-secao-servico .servico-item {
     padding: 5.5rem 0;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.lista-secao-servico .servico-item:nth-child(even) {
-    background-color: transparent;
+    background: transparent; /* Remove o fundo da section interna para herdar o da .lista-secao-servico */
 }
 
 .servico-item-conteudo {
@@ -814,64 +859,9 @@ section h2 {
     margin-bottom: 10px;
 }
 
-.porque-nos-item h3 .fas {
-    margin-right: 10px;
-}
-
-/* Estilos para a seção "Nosso Processo" */
-.processo-passos {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    text-align: center;
-}
-
-.processo-passo {
-    flex: 1;
-    padding: 20px;
-    position: relative;
-}
-
-.processo-passo .processo-icone {
-    font-size: 2.5rem;
-    color: #8e44ad;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.processo-passo .passo-numero {
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 50%;
-    background-color: #8e44ad; /* Cor de destaque para os números */
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin: 0 auto 15px auto;
-}
-
-.processo-passo h3 {
-    color: #171d73;
-    margin-bottom: 1rem;
-}
-
-/* Linhas conectando os passos */
-.processo-passo:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 65px; /* Ajustado para alinhar com o novo ícone */
-    right: -50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 2px;
-    background-color: #ddd;
-    z-index: -1;
-}
-
 /* Estilos para a seção de Depoimentos */
 #depoimentos {
-    background-color: transparent;
+    background-color: rgba(246, 249, 255, 0.7); /* Um pouco mais opaco para legibilidade */
 }
 
 .depoimentos-cartoes {
@@ -965,7 +955,7 @@ section h2 {
 .blog-cartao-postagem img {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: cover; /* A borda já é herdada do container .blog-cartao-postagem */
 }
 
 .blog-conteudo-postagem {
@@ -1035,6 +1025,18 @@ footer {
     /* Ao passar o mouse, o ícone fica azul claro para combinar com a identidade visual */
     color: var(--blue-300); /* Cor de destaque no hover */
     transform: translateY(-3px);
+}
+
+/* Estilo para o logo no rodapé */
+.footer-logo-link {
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo-link img {
+    height: 100px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
 }
 
 /* ======= Ajustes de layout: Resumo de cards ======= */
@@ -1174,7 +1176,8 @@ footer p { margin: 0; font-size: 0.95rem; }
 .carrossel-interno {
     position: relative;
     width: 100%;
-    height: 100%;
+    padding-top: 56.25%; /* Proporção 16:9 (900 / 1600) para manter o aspect-ratio */
+    height: 0;
 }
 
 .carrossel-item {
@@ -1200,6 +1203,40 @@ footer p { margin: 0; font-size: 0.95rem; }
     height: auto;
     display: block;
     object-fit: cover;
+    border-radius: 12px; /* Garante que a imagem tenha bordas arredondadas */
+}
+
+/* Estilos para o slide de depoimento dentro do carrossel */
+.depoimento-slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--blue-900);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.depoimento-slide img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.5rem auto;
+    border: 3px solid var(--white);
+    box-shadow: 0 4px 15px rgba(6,27,97,0.1);
+}
+
+.depoimento-slide p {
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
 }
 
 /* Setas maiores e com sombra */
@@ -1271,7 +1308,7 @@ footer p { margin: 0; font-size: 0.95rem; }
 
 /* --- Estilos para a seção da Fundadora --- */
 #fundadora {
-    background-color: #fdfdff; /* Fundo muito sutil para destacar */
+    background-color: rgba(253, 253, 255, 0.7); /* Fundo sutil e um pouco mais opaco */
 }
 
 #fundadora blockquote {
@@ -1288,4 +1325,51 @@ footer p { margin: 0; font-size: 0.95rem; }
 
 #fundadora blockquote p:not(:last-child) {
     margin-bottom: 1.5rem;
+}
+
+/* --- Estilos para o Cursor Personalizado --- */
+.custom-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Impede que o cursor intercepte cliques */
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    z-index: 9999; /* Garante que o cursor fique acima de tudo */
+}
+
+/* Efeito de hover: o cursor cresce e fica preenchido */
+.custom-cursor.hover {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(var(--blue-300-rgb), 0.5); /* Preenchimento azul claro semitransparente */
+    border-color: var(--accent); /* Borda azul mais forte */
+}
+
+/* Esconde o cursor em telas de toque para não deixar um ponto fixo na tela */
+@media (pointer: coarse) {
+    .custom-cursor {
+        display: none;
+    }
+    body, a, button, .botao-cta {
+        cursor: auto; /* Restaura o cursor padrão em dispositivos touch */
+    }
+}
+
+/* --- Estilos para a Faixa de Slogan --- */
+.tagline-banner {
+    background: rgba(6, 27, 97, 0.7); /* Fundo azul escuro semitransparente */
+    color: var(--white);
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.95rem; /* Levemente menor para acomodar o texto longo */
+    line-height: 1.5;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tagline-banner p {
+    margin: 0;
 }

@@ -36,10 +36,8 @@
     // Carrossel: apenas imagem + título principal, com autoplay e dots
     (function elegantCarousel() {
         qsa('.carrossel').forEach(carrossel => {
-            let wrap = carrossel.querySelector('.carrossel-inner-wrap');
             const interno = carrossel.querySelector('.carrossel-interno');
             if (!interno) return;
-            if (!wrap) { wrap = document.createElement('div'); wrap.className = 'carrossel-inner-wrap'; carrossel.insertBefore(wrap, interno); wrap.appendChild(interno); }
  
             const itens = Array.from(interno.querySelectorAll('.carrossel-item'));
             if (itens.length <= 1) return; // Não inicializa se não houver slides suficientes
@@ -50,18 +48,11 @@
             // O carrossel do hero usa legendas, os outros não.
             const useCaptions = carrossel.id === 'inicio-hero';
  
-            // criar dots
-            const dotsWrap = document.createElement('div'); dotsWrap.className = 'carrossel-dots';
-            const dots = [];
-            itens.forEach((_, i) => { const btn = document.createElement('button'); btn.type = 'button'; if (i === 0) btn.classList.add('ativo'); btn.addEventListener('click', () => { showSlide(i); restartAutoplay(); }); dotsWrap.appendChild(btn); dots.push(btn); });
-            carrossel.appendChild(dotsWrap);
- 
             let currentIndex = 0; let autoplayId = null; const AUTOPLAY_DELAY = 4500;
  
             function showSlide(i) {
                 currentIndex = (i + itens.length) % itens.length;
                 itens.forEach((it, idx) => it.classList.toggle('ativo', idx === currentIndex));
-                dots.forEach((d, idx) => d.classList.toggle('ativo', idx === currentIndex));
             }
  
             function nextSlide() { showSlide(currentIndex + 1); }
@@ -74,8 +65,8 @@
             if (next) next.addEventListener('click', () => { nextSlide(); restartAutoplay(); });
             if (prev) prev.addEventListener('click', () => { prevSlide(); restartAutoplay(); });
  
-            wrap.addEventListener('mouseenter', stopAutoplay);
-            wrap.addEventListener('mouseleave', startAutoplay);
+            carrossel.addEventListener('mouseenter', stopAutoplay);
+            carrossel.addEventListener('mouseleave', startAutoplay);
  
             showSlide(0);
             startAutoplay();
@@ -105,6 +96,24 @@
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();
         }
+    })();
+
+    // Cursor Personalizado
+    (function customCursor() {
+        const cursor = qs('.custom-cursor');
+        if (!cursor) return;
+
+        // Move o cursor com o mouse
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        // Adiciona efeito de hover em elementos clicáveis
+        qsa('a, button, .botao-cta, .controle-carrossel, .cartao-link').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
     })();
  
 })();
