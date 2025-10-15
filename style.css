@@ -1447,12 +1447,14 @@ footer p { margin: 0; font-size: 0.95rem; }
 
     header nav#nav-principal ul li {
         display: block;
-        margin: 1rem 0;
+        margin: 0.7rem 0; /* Reduz a margem vertical entre os itens */
         width: 100%;
     }
 
     header nav#nav-principal ul li a {
-        font-size: 1.2rem;
+        font-size: 1.1rem; /* Diminui o tamanho da fonte */
+        padding: 10px 15px; /* Ajusta o padding para o novo tamanho */
+        display: block; /* Garante que o link ocupe toda a largura */
     }
 
     /* Esconde os menus suspensos no mobile para simplificar */
@@ -1462,6 +1464,25 @@ footer p { margin: 0; font-size: 0.95rem; }
 
     /* Ajusta o layout da seção "Sobre" */
     #sobre .sobre-conteudo {
+        flex-direction: column;
+    }
+
+    /* Ajusta o layout da página de serviços para mobile */
+    .servico-item-conteudo {
+        flex-direction: column !important; /* Empilha imagem e texto */
+        gap: 30px;
+    }
+
+    .servico-item .servico-imagem,
+    .servico-item .servico-descricao {
+        max-width: 100%; /* Permite que ocupem toda a largura */
+    }
+
+    .servico-item .servico-descricao { text-align: center; }
+
+    /* Ajusta os cards de depoimentos e equipe para mobile */
+    .depoimentos-cartoes,
+    .equipe-membros {
         flex-direction: column;
     }
 }
