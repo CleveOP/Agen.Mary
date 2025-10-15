@@ -1419,7 +1419,7 @@ footer p { margin: 0; font-size: 0.95rem; }
         left: 0;
         width: 100%;
         height: 100%;
-        background: var(--blue-900); /* Cor azul sólida para cobrir todo o conteúdo */
+        background-color: var(--blue-900) !important; /* Garante que o fundo seja sólido */
         /* O backdrop-filter foi removido pois o fundo agora é opaco */
         flex-direction: column;
         align-items: center;
@@ -1457,10 +1457,11 @@ footer p { margin: 0; font-size: 0.95rem; }
     }
 
     /* Animação escalonada para os links do menu */
-    header nav#nav-principal.menu-aberto ul li:nth-child(1),
-    header nav#nav-principal.menu-aberto ul li:nth-child(2),
-    header nav#nav-principal.menu-aberto ul li:nth-child(3),
-    header nav#nav-principal.menu-aberto ul li:nth-child(4) {
+    header nav#nav-principal.menu-aberto ul li:nth-child(1) a,
+    header nav#nav-principal.menu-aberto ul li:nth-child(2) a,
+    header nav#nav-principal.menu-aberto ul li:nth-child(3) a,
+    header nav#nav-principal.menu-aberto ul li:nth-child(4) a,
+    header nav#nav-principal.menu-aberto ul li a.ativo {
         opacity: 1;
         transform: translateY(0);
     }
