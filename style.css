@@ -1413,25 +1413,27 @@ footer p { margin: 0; font-size: 0.95rem; }
 @media (max-width: 900px) {
     /* Esconde a navegação de desktop e mostra o botão hambúrguer */
     header nav#nav-principal {
-        display: none; /* Esconde o menu por padrão no mobile */
+        /* Novo estilo: Menu em tela cheia (Overlay) */
         position: fixed;
         top: 0;
-        right: 0;
-        width: 70%;
+        left: 0;
+        width: 100%;
         height: 100%;
-        background: rgba(6, 27, 97, 0.95); /* Fundo quase opaco */
+        background: rgba(6, 27, 97, 0.98); /* Fundo mais opaco para melhor leitura */
         backdrop-filter: blur(15px);
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
         z-index: 1000;
+        display: flex; /* Mantém como flex para centralizar o conteúdo */
     }
 
     header nav#nav-principal.menu-aberto {
-        display: flex;
-        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
     }
 
     #menu-hamburguer {
@@ -1446,14 +1448,25 @@ footer p { margin: 0; font-size: 0.95rem; }
     }
 
     header nav#nav-principal ul li {
+        opacity: 0; /* Itens começam invisíveis para animar */
+        transform: translateY(15px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
         display: block;
-        margin: 0.7rem 0; /* Reduz a margem vertical entre os itens */
+        margin: 1rem 0; /* Aumenta um pouco a margem para o novo layout */
         width: 100%;
     }
 
+    /* Animação escalonada para os links do menu */
+    header nav#nav-principal.menu-aberto ul li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    header nav#nav-principal.menu-aberto ul li:nth-child(2) { transition-delay: 0.05s; }
+    header nav#nav-principal.menu-aberto ul li:nth-child(3) { transition-delay: 0.1s; }
+    header nav#nav-principal.menu-aberto ul li:nth-child(4) { transition-delay: 0.15s; }
+
     header nav#nav-principal ul li a {
-        font-size: 1.1rem; /* Diminui o tamanho da fonte */
-        padding: 10px 15px; /* Ajusta o padding para o novo tamanho */
+        font-size: 1.4rem; /* Fonte maior, já que temos mais espaço */
         display: block; /* Garante que o link ocupe toda a largura */
     }
 
