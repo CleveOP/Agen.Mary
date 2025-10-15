@@ -1420,8 +1420,8 @@ footer p { margin: 0; font-size: 0.95rem; }
         width: 70%;
         max-width: 320px; /* Largura máxima para telas maiores */
         height: 100%;
-        background: rgba(6, 27, 97, 0.95); /* Fundo azul escuro semitransparente */
-        backdrop-filter: blur(15px);
+        background-color: var(--blue-900); /* Fundo azul sólido para melhor legibilidade */
+        /* O backdrop-filter foi removido pois o fundo agora é opaco */
         flex-direction: column;
         align-items: center;
         justify-content: center;
