@@ -1427,7 +1427,7 @@ footer p { margin: 0; font-size: 0.95rem; }
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.35s ease, visibility 0.35s ease;
-        z-index: 1000;
+        z-index: 1002; /* Aumentado para garantir que fique acima de tudo */
         display: flex; /* Mantém como flex para centralizar o conteúdo */
     }
 
@@ -1461,6 +1461,7 @@ footer p { margin: 0; font-size: 0.95rem; }
         opacity: 1;
         transform: translateY(0);
     }
+    header nav#nav-principal.menu-aberto ul li:nth-child(1) { transition-delay: 0s; }
     header nav#nav-principal.menu-aberto ul li:nth-child(2) { transition-delay: 0.05s; }
     header nav#nav-principal.menu-aberto ul li:nth-child(3) { transition-delay: 0.1s; }
     header nav#nav-principal.menu-aberto ul li:nth-child(4) { transition-delay: 0.15s; }
