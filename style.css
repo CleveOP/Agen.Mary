@@ -1420,7 +1420,7 @@ footer p { margin: 0; font-size: 0.95rem; }
         width: 70%;
         max-width: 320px; /* Largura máxima para telas maiores */
         height: 100%;
-        background-color: var(--blue-900); /* Fundo azul sólido para melhor legibilidade */
+        background-color: var(--white); /* Fundo branco para contraste com texto preto */
         /* O backdrop-filter foi removido pois o fundo agora é opaco */
         flex-direction: column;
         align-items: center;
@@ -1454,6 +1454,7 @@ footer p { margin: 0; font-size: 0.95rem; }
 
     header nav#nav-principal ul li a {
         font-size: 1.1rem;
+        color: var(--blue-900); /* Cor do texto alterada para preto/azul escuro */
         padding: 10px 15px;
         display: block;
     }
