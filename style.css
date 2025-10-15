@@ -1043,6 +1043,8 @@ footer {
 .resumo-cartoes {
     display: flex;
     gap: 24px;
+    justify-content: center; /* Centraliza os cartões horizontalmente */
+    flex-wrap: wrap; /* Permite que os cartões quebrem a linha em telas menores */
     align-items: stretch;
     margin-top: 1.5rem;
 }
@@ -1357,6 +1359,12 @@ footer p { margin: 0; font-size: 0.95rem; }
         cursor: auto; /* Restaura o cursor padrão em dispositivos touch */
     }
 }
+
+/* Ajuste específico para a foto do desenvolvedor na página "Sobre" */
+.equipe-cartao img[src*="EU.png"] {
+    object-position: top; /* Alinha a imagem pelo topo dentro do círculo, evitando cortar o rosto */
+}
+
 
 /* --- Estilos para a Faixa de Slogan --- */
 .tagline-banner {
