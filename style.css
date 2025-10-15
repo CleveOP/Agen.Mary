@@ -501,6 +501,16 @@ section h2 {
     box-shadow: 0 8px 24px rgba(43,97,209,0.12);
 }
 
+/* Animação de entrada para os títulos das seções */
+section h2 {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+section h2.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
 /* Subtítulo leve sob o h2 */
 section .secao-subtitulo {
     margin-top: 1.5rem;
@@ -1049,6 +1059,13 @@ footer {
     margin-top: 1.5rem;
 }
 
+/* Animação escalonada para os cartões */
+.resumo-cartoes .cartao:nth-child(2) { transition-delay: 0.1s; }
+.resumo-cartoes .cartao:nth-child(3) { transition-delay: 0.2s; }
+.resumo-cartoes .cartao:nth-child(4) { transition-delay: 0.3s; }
+.resumo-cartoes .cartao:nth-child(5) { transition-delay: 0.4s; }
+
+
 .resumo-cartoes .cartao {
     flex: 1 1 0;
     min-width: 220px;
@@ -1380,4 +1397,71 @@ footer p { margin: 0; font-size: 0.95rem; }
 
 .tagline-banner p {
     margin: 0;
+}
+
+/* --- Estilos para o Menu Hambúrguer e Responsividade --- */
+
+#menu-hamburguer {
+    display: none; /* Escondido em telas grandes */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    z-index: 1001;
+}
+
+@media (max-width: 900px) {
+    /* Esconde a navegação de desktop e mostra o botão hambúrguer */
+    header nav#nav-principal {
+        display: none; /* Esconde o menu por padrão no mobile */
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 70%;
+        height: 100%;
+        background: rgba(6, 27, 97, 0.95); /* Fundo quase opaco */
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+    }
+
+    header nav#nav-principal.menu-aberto {
+        display: flex;
+        transform: translateX(0);
+    }
+
+    #menu-hamburguer {
+        display: block;
+    }
+
+    /* Ajusta a lista de links para o menu mobile */
+    header nav#nav-principal ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    header nav#nav-principal ul li {
+        display: block;
+        margin: 1rem 0;
+        width: 100%;
+    }
+
+    header nav#nav-principal ul li a {
+        font-size: 1.2rem;
+    }
+
+    /* Esconde os menus suspensos no mobile para simplificar */
+    header nav ul li.menu-suspenso .menu-suspenso-conteudo {
+        display: none !important;
+    }
+
+    /* Ajusta o layout da seção "Sobre" */
+    #sobre .sobre-conteudo {
+        flex-direction: column;
+    }
 }
