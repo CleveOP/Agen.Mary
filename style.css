@@ -1459,7 +1459,7 @@ footer p { margin: 0; font-size: 0.95rem; }
     }
 
     /* Esconde os menus suspensos no mobile para simplificar */
-    header nav ul li.menu-suspenso .menu-suspenso-conteudo {
+    header nav#nav-principal ul li.menu-suspenso .menu-suspenso-conteudo {
         display: none !important;
     }
 
