@@ -163,6 +163,7 @@ header nav a.ativo {
 /* Contêiner do dropdown (o <li>) */
 header nav ul li.menu-suspenso {
     position: relative; /* Necessário para posicionar o submenu */
+    overflow: hidden; /* Garante que o conteúdo do dropdown não vaze quando escondido */
 }
 
 /* Seta para baixo */
@@ -190,6 +191,7 @@ header nav ul li.menu-suspenso .fa-chevron-down {
 /* Mostra o dropdown no hover */
 header nav ul li.menu-suspenso:hover .menu-suspenso-conteudo {
     display: block;
+    overflow: visible; /* Permite que o conteúdo seja visto no hover */
 }
 
 /* Gira a seta para cima quando o menu está aberto */
@@ -429,6 +431,7 @@ section .secao-subtitulo {
     flex: 0 0 40%; /* Ocupa 40% da largura, sem crescer ou encolher */
     max-width: 350px; /* Ajusta a largura máxima */
     margin: auto; /* Ajuda a centralizar em telas menores */
+    text-align: center; /* Centraliza o botão do currículo */
 }
 
 #sobre .sobre-imagem img {
@@ -1380,6 +1383,45 @@ footer p { margin: 0; font-size: 0.95rem; }
 /* Ajuste específico para a foto do desenvolvedor na página "Sobre" */
 .equipe-cartao img[src*="EU.png"] {
     object-position: top; /* Alinha a imagem pelo topo dentro do círculo, evitando cortar o rosto */
+}
+
+/* Estilos para os detalhes dentro do card da equipe */
+.equipe-detalhes {
+    text-align: left;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(6, 27, 97, 0.1);
+}
+
+.equipe-detalhes h5 {
+    color: var(--blue-700);
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.equipe-detalhes ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.9rem;
+}
+
+.equipe-detalhes ul li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.equipe-detalhes ul li i {
+    color: var(--accent);
+    margin-right: 8px;
+    width: 16px; /* Garante alinhamento dos ícones */
+}
+
+/* Estilos para a nova seção do desenvolvedor na home */
+#desenvolvedor p {
+    margin-bottom: 1rem;
 }
 
 
