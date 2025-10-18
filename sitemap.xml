@@ -10,10 +10,6 @@
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://agenciamscriacoes.netlify.app/index.html</loc>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://agenciamscriacoes.netlify.app/sobre.html</loc>
   <priority>0.80</priority>
 </url>
