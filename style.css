@@ -823,7 +823,7 @@ section h2 {
 
 .servico-item .servico-imagem {
     flex: 1;
-    max-width: 50%;
+    max-width: 40%;
 }
 
 .servico-item .servico-imagem img {
@@ -840,7 +840,7 @@ section h2 {
 
 .servico-item .servico-descricao {
     flex: 1;
-    max-width: 50%;
+    max-width: 60%;
 }
 
 .servico-item .servico-descricao h3 {
