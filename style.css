@@ -1424,6 +1424,22 @@ footer p { margin: 0; font-size: 0.95rem; }
     margin-bottom: 1rem;
 }
 
+/* Estilo para a imagem da fundadora na página inicial */
+#historia-fundadora .sobre-imagem img {
+    width: 280px; /* Tamanho menor */
+    height: 280px; /* Mesma altura para formar um círculo */
+    object-fit: cover;
+    border-radius: 50%; /* Deixa a imagem redonda */
+    border: 6px solid rgba(6, 27, 97, 0.06);
+    box-shadow: 0 10px 20px rgba(6, 27, 97, 0.1);
+    margin: 0 auto; /* Centraliza a imagem no seu contêiner */
+    display: block;
+}
+
+#historia-fundadora .sobre-conteudo {
+    align-items: center; /* Alinha verticalmente o texto e a imagem */
+}
+
 
 /* --- Estilos para a Faixa de Slogan --- */
 .tagline-banner {
@@ -1440,6 +1456,46 @@ footer p { margin: 0; font-size: 0.95rem; }
 .tagline-banner p {
     margin: 0;
 }
+
+/* Estilos para o carrossel de serviços */
+#servicos-loop {
+    overflow: hidden;
+    padding: 2rem 0;
+}
+
+#servicos-loop h2 {
+    margin-bottom: 1rem;
+}
+
+.servicos-carrossel {
+    display: flex;
+    animation: carrossel-loop 20s linear infinite;
+    width: max-content; /* Garante que o container seja do tamanho do conteúdo */
+}
+
+.servico-item {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: var(--blue-500);
+    color: var(--white);
+    border-radius: 5px;
+    white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Animação do carrossel */
+@keyframes carrossel-loop {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Calcula a largura total dos itens e move o carrossel para a esquerda */
+        transform: translateX(calc(-1 * (
+            var(--num-itens) * (20px + 100px) /* Margem + Largura média do item */
+        )));
+    }
+}
+
 
 /* --- Estilos para o Menu Hambúrguer e Responsividade --- */
 
