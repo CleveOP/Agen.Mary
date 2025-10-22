@@ -1440,6 +1440,53 @@ footer p { margin: 0; font-size: 0.95rem; }
     align-items: center; /* Alinha verticalmente o texto e a imagem */
 }
 
+/* --- Estilos para a Faixa de Serviços Animada --- */
+.servicos-animados {
+    background: var(--blue-900);
+    color: var(--white);
+    padding: 0.75rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(6, 27, 97, 0.1);
+}
+
+.servicos-animados .lista-servicos {
+    display: flex;
+    animation: scroll-servicos 40s linear infinite;
+}
+
+.servicos-animados span {
+    display: flex;
+    align-items: center;
+    margin: 0 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.servicos-animados span i {
+    margin-right: 8px;
+    color: var(--blue-300);
+}
+
+@keyframes scroll-servicos {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* Pausa a animação no hover */
+.servicos-animados:hover .lista-servicos {
+    animation-play-state: paused;
+}
+
+
+
 
 /* --- Estilos para a Faixa de Slogan --- */
 .tagline-banner {
