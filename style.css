@@ -342,13 +342,6 @@ section .secao-subtitulo {
     text-align: center;
     flex: 1;
     border: 1px solid rgba(255, 255, 255, 0.2); /* Borda de vidro */
- 
-    /* Estilos para a animação de fade-in */
-    opacity: 0;
-    transform: translateY(20px); /* Posição inicial para o fade-in */
-    /* Transição suave para todas as propriedades que vamos animar */
-    /* A transição do transform foi ajustada para ser mais rápida no retorno */
-    transition: opacity 0.5s ease-out, transform 0.3s ease-out, box-shadow 0.4s ease-out, border-color 0.4s ease-out;
 }
 
 .cartao.visivel {
@@ -463,6 +456,7 @@ section .secao-subtitulo {
     backdrop-filter: blur(10px);
     padding: 25px;
     border-radius: 8px;
+    border: 1px solid var(--accent); /* Borda azul adicionada aqui */
     box-shadow: 0 6px 18px rgba(6,27,97,0.06);
     border: 1px solid rgba(255, 255, 255, 0.2);
     flex: 1;
@@ -486,10 +480,7 @@ section .secao-subtitulo {
 
 /* Seções com fundo alternado para dar ritmo visual */
 section:not(#inicio-hero) {
-    background: rgba(246, 249, 255, 0.6); /* Cor --surface com 60% de opacidade */
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    /* A borda foi removida daqui para ser aplicada nos cards individuais */
 }
 
 /* Cabeçalho de seção mais marcante */
@@ -808,7 +799,8 @@ section h2 {
 
 .lista-secao-servico .servico-item {
     padding: 5.5rem 0;
-    background: transparent; /* Remove o fundo da section interna para herdar o da .lista-secao-servico */
+    background: rgba(246, 249, 255, 0.6); /* Cor --surface com 60% de opacidade */
+    backdrop-filter: blur(12px); /* Efeito fosco/vidro */
 }
 
 .servico-item-conteudo {
@@ -887,6 +879,7 @@ section h2 {
     background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
     backdrop-filter: blur(10px);
     padding: 35px;
+    border: 1px solid var(--accent); /* Borda azul adicionada aqui */
     border-radius: 8px;
     box-shadow: 0 6px 18px rgba(6,27,97,0.06);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1442,12 +1435,15 @@ footer p { margin: 0; font-size: 0.95rem; }
 
 /* --- Estilos para a Faixa de Serviços Animada --- */
 .servicos-animados {
+    position: sticky;
+    top: 127px; /* Altura aproximada do cabeçalho em desktop */
     background: var(--blue-900);
     color: var(--white);
     padding: 0.75rem 0;
     white-space: nowrap;
     overflow: hidden;
     display: flex;
+    z-index: 999; /* Garante que fique acima do conteúdo, mas abaixo do header */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 10px rgba(6, 27, 97, 0.1);
 }
@@ -1485,6 +1481,11 @@ footer p { margin: 0; font-size: 0.95rem; }
     animation-play-state: paused;
 }
 
+/* Ajuste para a posição da faixa em telas menores */
+@media (max-width: 900px) {
+    .servicos-animados { top: 91px; } /* Altura aproximada do cabeçalho em mobile */
+}
+
 
 
 
@@ -1502,45 +1503,6 @@ footer p { margin: 0; font-size: 0.95rem; }
 
 .tagline-banner p {
     margin: 0;
-}
-
-/* Estilos para o carrossel de serviços */
-#servicos-loop {
-    overflow: hidden;
-    padding: 2rem 0;
-}
-
-#servicos-loop h2 {
-    margin-bottom: 1rem;
-}
-
-.servicos-carrossel {
-    display: flex;
-    animation: carrossel-loop 20s linear infinite;
-    width: max-content; /* Garante que o container seja do tamanho do conteúdo */
-}
-
-.servico-item {
-    padding: 10px 20px;
-    margin: 0 10px;
-    background-color: var(--blue-500);
-    color: var(--white);
-    border-radius: 5px;
-    white-space: nowrap; /* Impede que o texto quebre em várias linhas */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Animação do carrossel */
-@keyframes carrossel-loop {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        /* Calcula a largura total dos itens e move o carrossel para a esquerda */
-        transform: translateX(calc(-1 * (
-            var(--num-itens) * (20px + 100px) /* Margem + Largura média do item */
-        )));
-    }
 }
 
 
