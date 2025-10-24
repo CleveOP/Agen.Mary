@@ -737,7 +737,7 @@ section h2 {
 .equipe-membros {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 20px; /* Reduzido o espaçamento entre os cards */
     perspective: 1000px; /* Adiciona perspectiva para o efeito 3D */
     flex-wrap: wrap; /* Permite que os cards quebrem a linha em telas menores */
 }
@@ -749,7 +749,7 @@ section h2 {
     box-shadow: 0 6px 18px rgba(6,27,97,0.06);
     text-align: center;
     padding: 20px;
-    width: 250px;
+    width: 240px; /* Reduzida a largura para caber 4 lado a lado */
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
 
