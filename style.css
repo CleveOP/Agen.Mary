@@ -29,16 +29,6 @@ html, body {
     --blue-700-rgb: 22, 48, 127;
 }
 
-body {
-    /* Fundo claro e suave para dar ar de elegância */
-    background: linear-gradient(to bottom, var(--surface), var(--white));
-    color: var(--gray-600); /* cinza para o texto principal */
-    line-height: 1.6;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;    
-    cursor: none; /* Esconde o cursor padrão */
-}
-
 /* Define a fonte padrão para todos os títulos */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', serif;
@@ -109,6 +99,7 @@ header .container .logo-link img:first-child { /* Ícone do logo */
     transition: text-shadow 0.3s ease;
 }
 
+/* Efeito de brilho no logo ao passar o mouse */
 .logo-link:hover .logo {
     text-shadow: 0 0 6px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.4); /* Efeito de brilho mais intenso */
 }
@@ -255,6 +246,24 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
     outline-offset: 2px;
 }
 
+/* --- Estilos para o Menu Hambúrguer e Responsividade --- */
+
+#menu-hamburguer {
+    display: none; /* Escondido em telas grandes */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    z-index: 1003; /* Aumentado para garantir que o botão fique acima do menu */
+}
+
+@media (max-width: 900px) {
+    #menu-hamburguer, header nav#nav-principal {
+        display: block; /* Ajuste para garantir visibilidade em mobile */
+    }
+}
+
+
 /* Seções */
 section {
     padding: 5.5rem 0;
@@ -263,7 +272,7 @@ section {
 section h2 {
     text-align: center;
     font-size: 3rem; /* Aumentado novamente */
-    margin-bottom: 1.5rem;    
+    margin-bottom: 1.5rem;
 }
 
 section .secao-subtitulo {
@@ -385,26 +394,35 @@ section .secao-subtitulo {
     border-color: #171d73; /* A borda se torna azul no hover */
 }
 
-/* Estilo específico para a imagem na seção "Quem Somos" da página inicial */
-/* Remove a formatação circular que é usada na página "Sobre" */
+
+/* Ajustes para a seção "Quem Somos" na página inicial */
+#quem-somos-home .sobre-conteudo {
+    text-align: center;
+}
+
+#quem-somos-home .sobre-texto {
+    max-width: 800px; /* Melhora a legibilidade em telas largas */
+    margin: 0 auto; /* Centraliza o bloco de texto */
+}
+
+/* Estilo para a imagem do logo na seção "Quem Somos" da home */
 #quem-somos-home .sobre-imagem img {
-    width: 280px; /* Tamanho da imagem */
-    height: 280px; /* Mesma altura para formar um círculo */
-    object-fit: cover; /* Garante que a imagem preencha o círculo */
+    width: 250px; /* Largura da imagem */
+    height: 250px; /* Altura igual à largura para formar um círculo */
     border-radius: 50%; /* Deixa a imagem redonda */
-    border: 6px solid var(--blue-700); /* Borda azul sólida */
-    box-shadow: 0 10px 25px rgba(22, 48, 127, 0.2); /* Sombra sutil */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    object-fit: cover; /* Garante que a imagem preencha o círculo sem distorcer */
+    margin-top: 2.5rem; /* Espaço entre o botão e o logo */
+    box-shadow: 0 10px 25px rgba(22, 48, 127, 0.1);
 }
 
 /* Estilos para a seção Missão, Visão e Valores */
 .missao-conteudo {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     perspective: 1000px; /* Adiciona perspectiva para o efeito 3D */
     text-align: center;
 }
-
 .missao-item {
     background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
     backdrop-filter: blur(10px);
@@ -413,7 +431,6 @@ section .secao-subtitulo {
     border: 1px solid var(--accent); /* Borda azul adicionada aqui */
     box-shadow: 0 6px 18px rgba(6,27,97,0.06);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    flex: 1;
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
  
@@ -481,12 +498,11 @@ section .secao-subtitulo {
     list-style: none;
     width: 20px;
     height: 20px;
-    background-image: url('./img/LogoMsCriacoes.png');
+    background-image: url('./img/LogoMsCriacoes.png'); /* Usa a imagem do logo */
     background-size: cover;
-    opacity: 0.15; /* Opacidade para o efeito sutil */
+    opacity: 0.15;
     animation: animate-circles 25s linear infinite;
     bottom: -150px; /* Começam fora da tela, na parte de baixo */
-    border-radius: 50%;
 }
 
 .background-circles span:nth-child(1) {
@@ -688,11 +704,11 @@ section h2 {
 
 /* Estilos para a seção Nossa Equipe */
 .equipe-membros {
-    display: flex;
+    display: grid;
+    /* Cria colunas responsivas que se ajustam automaticamente */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     justify-content: center;
     gap: 20px; /* Reduzido o espaçamento entre os cards */
-    perspective: 1000px; /* Adiciona perspectiva para o efeito 3D */
-    flex-wrap: wrap; /* Permite que os cards quebrem a linha em telas menores */
 }
 
 .equipe-cartao {
@@ -701,8 +717,7 @@ section h2 {
     border-radius: 8px;
     box-shadow: 0 6px 18px rgba(6,27,97,0.06);
     text-align: center;
-    padding: 20px;
-    width: 240px; /* Reduzida a largura para caber 4 lado a lado */
+    padding: 20px;    
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
 
@@ -994,10 +1009,11 @@ footer {
 
 /* ======= Ajustes de layout: Resumo de cards ======= */
 .resumo-cartoes {
-    display: flex;
+    display: grid;
+    /* Cria colunas responsivas que se ajustam automaticamente */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 24px;
     justify-content: center; /* Centraliza os cartões horizontalmente */
-    flex-wrap: wrap; /* Permite que os cartões quebrem a linha em telas menores */
     align-items: stretch;
     margin-top: 1.5rem;
 }
@@ -1008,11 +1024,6 @@ footer {
 .resumo-cartoes .cartao:nth-child(4) { transition-delay: 0.3s; }
 .resumo-cartoes .cartao:nth-child(5) { transition-delay: 0.4s; }
 
-
-.resumo-cartoes .cartao {
-    flex: 1 1 0;
-    min-width: 220px;
-}
 
 /* Pequenas melhorias tipográficas */
 h1, h2, h3, h4 {
@@ -1039,8 +1050,12 @@ a:focus, button:focus, .botao-cta:focus {
     .logo-text-img {
         height: 110px;
     }
-    .resumo-cartoes { flex-direction: column; }
-    .missao-conteudo, .equipe-membros { flex-direction: column; gap: 18px; }
+    /* Em telas menores, o grid já se ajusta para uma coluna, então a regra de flex-direction não é mais necessária */
+    .resumo-cartoes,
+    .missao-conteudo,
+    .equipe-membros {
+        grid-template-columns: 1fr; /* Força uma única coluna em telas muito pequenas */
+    }
 }
 
 @media (max-width: 480px) {
@@ -1458,124 +1473,10 @@ footer p { margin: 0; font-size: 0.95rem; }
 /* Animação de brilho com mais cores (verde, azul, laranja, amarelo) */
 @keyframes animate-glow-colors {
     0%, 100% { text-shadow: 0 0 10px rgba(255, 193, 7, 0.9), 0 0 15px rgba(255, 193, 7, 0.7); } /* Amarelo */
-    20% { text-shadow: 0 0 10px rgba(255, 107, 0, 0.9), 0 0 15px rgba(255, 107, 0, 0.7); } /* Laranja */
-    40% { text-shadow: 0 0 10px rgba(76, 175, 80, 0.9), 0 0 15px rgba(76, 175, 80, 0.7); } /* Verde */
-    60% { text-shadow: 0 0 10px rgba(0, 188, 212, 0.9), 0 0 15px rgba(0, 188, 212, 0.7); } /* Ciano */
-    80% { text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.9), 0 0 15px rgba(var(--accent-rgb), 0.7); } /* Azul */
-}
-
-
-
-/* --- Estilos para a Faixa de Slogan --- */
-.tagline-banner {
-    background: rgba(6, 27, 97, 0.7); /* Fundo azul escuro semitransparente */
-    color: var(--white);
-    text-align: center;
-    padding: 1rem 0;
-    font-size: 0.95rem; /* Levemente menor para acomodar o texto longo */
-    line-height: 1.5;
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.tagline-banner p {
-    margin: 0;
-}
-
-
-/* --- Estilos para o Menu Hambúrguer e Responsividade --- */
-
-#menu-hamburguer {
-    display: none; /* Escondido em telas grandes */
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    z-index: 1003; /* Aumentado para garantir que o botão fique acima do menu */
-}
-
-@media (max-width: 900px) {
-    /* Esconde a navegação de desktop e mostra o botão hambúrguer */
-    header nav#nav-principal {
-        /* Estilo de menu lateral (hambúrguer) */
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 70%;
-        max-width: 320px; /* Largura máxima para telas maiores */
-        height: 100%;
-        background-color: var(--white); /* Fundo branco para contraste com texto preto */
-        /* O backdrop-filter foi removido pois o fundo agora é opaco */
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 1002;
-        display: none; /* Começa escondido */
-    }
-
-    header nav#nav-principal.menu-aberto {
-        display: flex;
-        transform: translateX(0);
-    }
-
-    #menu-hamburguer {
-        display: block;
-    }
-
-    header nav#nav-principal ul {
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-    }
-
-    header nav#nav-principal ul li {
-        display: block;
-        margin: 0.8rem 0;
-        width: 100%;
-    }
-
-    header nav#nav-principal ul li a {
-        font-size: 1.1rem;
-        color: var(--blue-900); /* Cor do texto alterada para preto/azul escuro */
-        padding: 10px 15px;
-        display: block;
-    }
-
-    /* Esconde os menus suspensos no mobile para simplificar */
-    header nav#nav-principal ul li.menu-suspenso .menu-suspenso-conteudo {
-        display: none !important;
-    }
-
-    /* Ajusta o layout da seção "Sobre" */
-    #sobre .sobre-conteudo {
-        flex-direction: column;
-    }
-
-    /* Ajusta o layout da página de serviços para mobile */
-    .servico-item-conteudo {
-        flex-direction: column !important; /* Empilha imagem e texto */
-        gap: 30px;
-    }
-
-    .servico-item .servico-imagem,
-    .servico-item .servico-descricao {
-        max-width: 100%; /* Permite que ocupem toda a largura */
-    }
-
-    .servico-item .servico-descricao { text-align: center; }
-
-    /* Ajusta os cards de depoimentos e equipe para mobile */
-    .cabecalho-pagina-titulo h1 { font-size: 2.5rem; }
-    section h2 { font-size: 2.2rem; }
-    .servico-item .servico-descricao h3 { font-size: 2rem; }
-    .blog-conteudo-postagem h3 { font-size: 1.5rem; }
-
-    .depoimentos-cartoes,
-    .equipe-membros {
-        flex-direction: column;
-    }
+    20% { text-shadow: 0 0 10px rgba(76, 175, 80, 0.9), 0 0 15px rgba(76, 175, 80, 0.7); } /* Verde */
+    40% { text-shadow: 0 0 10px rgba(var(--accent-fluorescent-rgb), 0.9), 0 0 15px rgba(var(--accent-fluorescent-rgb), 0.7); } /* Azul Ciano */
+    60% { text-shadow: 0 0 10px rgba(156, 39, 176, 0.9), 0 0 15px rgba(156, 39, 176, 0.7); } /* Roxo */
+    80% { text-shadow: 0 0 10px rgba(244, 67, 54, 0.9), 0 0 15px rgba(244, 67, 54, 0.7); } /* Vermelho */
 }
 
 /* --- Estilos Específicos para a Página "Criar Site" --- */
@@ -1730,4 +1631,146 @@ footer p { margin: 0; font-size: 0.95rem; }
     #menu-vertical {
         display: none;
     }
+}
+
+
+
+
+
+/* ======= CABEÇALHO DA SEÇÃO PRINCIPAL ======= */
+.cabecalho-pagina-titulo h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  text-align: center;
+  color: var(--blue-900);
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(90deg, var(--blue-500) 30%, var(--blue-300) 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cabecalho-pagina-titulo h1::before {
+  content: "\f005";
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  color: var(--accent-fluorescent);
+  margin-right: 14px;
+  font-size: 1.3em;
+  vertical-align: middle;
+}
+.cabecalho-pagina-titulo h1::after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  margin-top: 8px;
+  width: 60%;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--blue-500), var(--accent-fluorescent));
+  transition: width .4s cubic-bezier(.4,0,.2,1);
+}
+.cabecalho-pagina-titulo h1:hover::after,
+.cabecalho-pagina-titulo h1:focus::after {
+  width: 90%;
+}
+
+/* ======= ALTERNÂNCIA DE FUNDO NAS SEÇÕES DE SERVIÇO ======= */
+.lista-secao-servico section:nth-of-type(even) {
+  background: linear-gradient(90deg, var(--surface) 80%, var(--muted) 100%);
+}
+.lista-secao-servico section:nth-of-type(odd) {
+  background: var(--white);
+}
+
+/* ======= CARD DE SERVIÇO ======= */
+.servico-item {
+  box-shadow: 0 6px 24px rgba(43,97,209,0.10);
+  border-radius: 18px;
+  margin-bottom: 3.5rem;
+  border: 2px solid transparent;
+  transition: box-shadow .22s, border .22s, transform .18s;
+}
+.servico-item:hover,
+.servico-item:focus-within {
+  box-shadow: 0 16px 48px rgba(43,97,209,0.19), 0 2px 8px rgba(0,0,0,0.06);
+  border-image: linear-gradient(90deg, var(--blue-500), var(--accent-fluorescent)) 1;
+  transform: translateY(-5px); /* Remove a rotação e escala, aplica apenas um leve "lift" */
+}
+
+/* ======= IMAGEM DO SERVIÇO ======= */
+.servico-imagem img {
+  border-radius: 13px;
+  box-shadow: 0 7px 18px rgba(43,97,209,0.07);
+  transition: transform .27s cubic-bezier(.44,1.34,.44,1), box-shadow .21s;
+}
+.servico-item:hover .servico-imagem img {
+  transform: scale(1.04) rotate(-1.5deg);
+  box-shadow: 0 20px 40px rgba(43,97,209,.15);
+}
+
+/* ======= BOTÃO/CTA ======= */
+.botao-cta {
+  background: linear-gradient(90deg, var(--blue-700), var(--accent-fluorescent));
+  color: white;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: bold;
+  letter-spacing: .04em;
+  box-shadow: 0 4px 16px rgba(91,139,240,.10);
+}
+.botao-cta:hover, .botao-cta:focus {
+  background: linear-gradient(90deg, var(--blue-900), var(--accent-fluorescent));
+}
+
+/* ======= SEPARADOR ENTRE SEÇÕES ======= */
+.lista-secao-servico section:not(:last-child)::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-top: -20px;
+  background: linear-gradient(135deg, transparent 60%, rgba(91,139,240,0.08) 100%);
+  transform: skewY(-3deg);
+}
+
+/* ======= RESPONSIVIDADE ======= */
+@media (max-width:900px) {
+  .servico-item-conteudo {
+    flex-direction: column !important;
+    gap: 24px;
+    padding: 1rem 0;
+  }
+}
+@media (max-width:600px) {
+  .servico-descricao h3 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+}
+
+/* ======= MICROANIMAÇÃO EM ÍCONES (quando houver) ======= */
+.servico-descricao h3 i,
+.missao-item h3 i {
+    color: var(--accent-fluorescent);
+    filter: drop-shadow(0 0 8px var(--blue-300));
+    transition: color .35s, filter .35s;
+}
+.servico-descricao h3:hover i,
+.missao-item h3:hover i {
+    color: var(--blue-700);
+    filter: drop-shadow(0 0 14px var(--accent-fluorescent));
+}
+
+/* ======= MENU SUSPENSO MELHORADO ======= */
+.menu-suspenso > a .fa-chevron-down {
+    transition: transform .32s cubic-bezier(.47,1.64,.41,.8);
+}
+.menu-suspenso:hover > a .fa-chevron-down {
+    transform: rotate(180deg) scale(1.07);
+}
+
+/* ======= MELHORIA DE FOCO ACESSÍVEL ======= */
+a:focus-visible, .botao-cta:focus-visible {
+    outline: 3px solid var(--accent-fluorescent);
+    outline-offset: 2px;
 }
