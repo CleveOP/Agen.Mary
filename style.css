@@ -257,13 +257,6 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
     z-index: 1003; /* Aumentado para garantir que o botão fique acima do menu */
 }
 
-@media (max-width: 900px) {
-    #menu-hamburguer, header nav#nav-principal {
-        display: block; /* Ajuste para garantir visibilidade em mobile */
-    }
-}
-
-
 /* Seções */
 section {
     padding: 5.5rem 0;    
@@ -1042,27 +1035,76 @@ a:focus, button:focus, .botao-cta:focus {
 
 /* ======= Responsividade ======= */
 @media (max-width: 900px) {
+    /* --- GERAL --- */
     .container { width: 92%; }
-    header .container img { height: 64px; }
-    header .container .logo-link img:first-child {
-        height: 110px;
-    }
-    /* Ajusta o tamanho da imagem do nome em telas menores */
-    .logo-text-img {
-        height: 110px;
-    }
-    /* Em telas menores, o grid já se ajusta para uma coluna, então a regra de flex-direction não é mais necessária */
-    .resumo-cartoes,
-    .missao-conteudo,
-    .equipe-membros {
-        grid-template-columns: 1fr; /* Força uma única coluna em telas muito pequenas */
-    }
-}
+    section { padding: 3rem 0; }
+    section h2 { font-size: 2.2rem; margin-bottom: 2.5rem !important; }
+    .secao-subtitulo { font-size: 1rem; margin-bottom: 2.5rem; }
 
-@media (max-width: 480px) {
-    header nav ul li { display: block; margin: 6px 0; }
-    header nav a { padding: 8px 10px; }    .carrossel { border-radius: 6px; }
-    .cartao { padding: 18px; }    
+    /* --- CABEÇALHO E NAVEGAÇÃO MÓVEL --- */
+    #menu-hamburguer {
+        display: block; /* Mostra o botão do hambúrguer */
+    }
+
+    header nav#nav-principal {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(6, 27, 97, 0.95);
+        backdrop-filter: blur(10px);
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1002;
+        padding-top: 8rem;
+    }
+
+    header nav#nav-principal.nav-aberto {
+        transform: translateX(0);
+    }
+
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    header nav ul li {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    header nav a {
+        font-size: 1.8rem;
+        display: block;
+        padding: 1rem;
+    }
+
+    .menu-suspenso-conteudo {
+        position: static;
+        display: none; /* Escondido por padrão */
+        background: transparent;
+        box-shadow: none;
+        padding: 1rem 0 0 0;
+        min-width: auto;
+    }
+
+    .menu-suspenso:hover .menu-suspenso-conteudo {
+        display: block; /* Mostra no hover/toque */
+    }
+
+    .menu-suspenso-conteudo li a {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    header .container .logo-link img:first-child {
+        height: 100px;
+    }
 }
 
 /* Ajuste leve no botão do carrossel para dispositivos touch */
@@ -1072,6 +1114,27 @@ a:focus, button:focus, .botao-cta:focus {
 
 /* Pequena melhora para garantir que o ano no footer seja visível em temas escuros */
 footer p { margin: 0; font-size: 0.95rem; }
+
+@media (max-width: 768px) {
+    /* Força uma única coluna para todos os layouts de grid */
+    .resumo-cartoes,
+    .missao-conteudo,
+    .equipe-membros,
+    .depoimentos-cartoes,
+    .servicos-resumo {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+
+    .sobre-conteudo {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .cartao { padding: 18px; }
+    section h2 { font-size: 1.8rem; }
+}
 
 /* Estilos para a Seção de Contato */
 #contato {
