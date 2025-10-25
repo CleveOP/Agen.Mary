@@ -266,10 +266,8 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
 
 /* Seções */
 section {
-    padding: 5.5rem 0;
-    /* Aplica o mesmo efeito de vidro azulado do header */
-    background: rgba(6, 27, 97, 0.8);
-    backdrop-filter: saturate(120%) blur(10px);
+    padding: 5.5rem 0;    
+    background: transparent;
 }
 
 section h2 {
