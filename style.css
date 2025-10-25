@@ -23,6 +23,8 @@ html, body {
     --muted: #f0f3fa;
     --accent: var(--blue-500);
     --blue-300-rgb: 91, 139, 240;
+    --accent-fluorescent: #00E5FF; /* Ciano fluorescente */
+    --accent-fluorescent-rgb: 0, 229, 255;
     --blue-500-rgb: 43, 97, 209;
     --blue-700-rgb: 22, 48, 127;
 }
@@ -35,6 +37,13 @@ body {
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;    
     cursor: none; /* Esconde o cursor padrão */
+}
+
+/* Define a fonte padrão para todos os títulos */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700; /* Garante que os títulos fiquem em negrito */
+    color: var(--blue-900); /* Cor padrão para títulos */
 }
 
 
@@ -63,14 +72,12 @@ a, button, .botao-cta {
 
 /* Cabeçalho */
 header {
+    position: relative; /* Necessário para o z-index funcionar corretamente */
+    z-index: 1005; /* Garante que o header e seu conteúdo (menu) fiquem acima de tudo */
     background: rgba(6, 27, 97, 0.8); /* Fundo semitransparente */
     color: var(--white);
     padding: 0.85rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: saturate(120%) blur(10px); /* Efeito de vidro */
+    border-bottom: 1px solid rgba(255,255,255,0.06);    backdrop-filter: saturate(120%) blur(10px); /* Efeito de vidro */
 }
 
 header .container {
@@ -87,41 +94,23 @@ header .container {
 }
 
 /* Estilo para a imagem/logo no cabeçalho */
-header .container .logo-link img {
-    height: 100px; /* Define uma altura para o logo */
+/* Aplica o estilo apenas ao ícone do logo (a primeira imagem) */
+header .container .logo-link img:first-child { /* Ícone do logo */
+    height: 150px; /* Altura do ícone */
     margin-right: 12px; /* Espaço entre a imagem e o texto */
     border-radius: 50%; /* Deixa a imagem do logo redonda */
 }
 
-header .logo { /* Estilo para o texto "MS Criações" */
-    color: var(--white);
-    transition: color 0.3s ease, text-shadow 0.3s ease;    
-    position: relative; /* Necessário para posicionar a linha abaixo */
-    padding-bottom: 5px; /* Cria um pequeno espaço para a linha */
+/* Novo estilo para a imagem com o nome "MS Criações" */
+.logo-text-img {
+    height: 200px; /* Altura da imagem do nome */
+    width: auto; /* Largura automática para manter a proporção e evitar distorção */
+    max-width: 350px; /* Limita a largura máxima para não ficar excessivamente grande */
+    transition: filter 0.3s ease;
 }
 
-/* A linha animada */
-header .logo::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: var(--accent);
-    bottom: 0;
-    left: 0;
-    transform: scaleX(0); /* Começa invisível (escala 0) */
-    transform-origin: center; /* A animação acontece a partir do centro */
-    transition: transform 0.4s ease-out; /* Animação suave */
-}
-
-.logo-link:hover .logo {
-    color: var(--white);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Efeito de brilho branco */
-}
-
-/* Expande a linha no hover */
-.logo-link:hover .logo::after {
-    transform: scaleX(1); /* Expande a linha para 100% da largura */
+.logo-link:hover .logo-text-img {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5)); /* Efeito de brilho suave */
 }
 
 header nav ul {
@@ -136,18 +125,21 @@ header nav ul li {
 header nav a {
     color: #ffffff; /* branco */
     text-decoration: none;
-    font-weight: bold;
+    font-family: 'Cormorant Garamond', serif; /* Nova fonte elegante */
+    font-size: 1.4rem; /* Tamanho ajustado para a nova fonte */
+    font-weight: 700; /* Usa a versão em negrito da fonte para melhor leitura */
     padding: 10px 15px; /* Adiciona preenchimento para criar uma área de clique maior */
     border-radius: 5px; /* Bordas arredondadas */
     position: relative; /* Necessário para o efeito de movimento */
     top: 0;
-    transition: top 0.2s ease, background-color 0.2s ease, color 0.2s ease; /* Transições suaves */
+    transition: top 0.2s ease, background-color 0.2s ease, color 0.2s ease, text-shadow 0.2s ease; /* Transições suaves */
 }
 
 header nav a:hover {
     top: -3px; /* Move o link para cima */
     background-color: rgba(255, 255, 255, 0.08); /* Fundo branco semitransparente */
-    color: var(--accent); /* Texto do link fica azul claro no hover */
+    color: var(--accent-fluorescent); /* Texto do link fica ciano fluorescente */
+    text-shadow: 0 0 8px rgba(var(--accent-fluorescent-rgb), 0.5); /* Efeito de brilho */
 }
 
 /* Estilo para o link da página ativa no menu */
@@ -155,7 +147,8 @@ header nav a.ativo {
     top: -3px;
     background-color: rgba(255, 255, 255, 0.12);
     box-shadow: 0 3px 8px rgba(6,27,97,0.12); /* sombra azulada sutil */
-    color: var(--accent);
+    color: var(--accent-fluorescent);
+    text-shadow: 0 0 8px rgba(var(--accent-fluorescent-rgb), 0.5);
 }
 
 /* --- Estilos para o Menu Dropdown --- */
@@ -206,9 +199,11 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
 }
 
 .menu-suspenso-conteudo li a {
-    padding: 12px 20px;
+    padding: 10px 20px; /* Diminuído o espaçamento vertical */
     display: block; /* Faz o link ocupar todo o espaço do <li> */
     white-space: nowrap; /* Impede que o texto quebre em duas linhas */
+    font-size: 1rem; /* Tamanho da fonte reduzido para o submenu */
+    font-weight: 400; /* Fonte um pouco mais leve para o submenu */
 }
 
 /* Seção Hero (Banner) */
@@ -229,12 +224,27 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
     height: 100%;
     width: 100%;
 }
-
 #inicio-hero .carrossel-item img {
     height: 100%;
     width: 100%; /* Garante que a imagem ocupe a largura total */
-    object-fit: contain;
+    object-fit: cover; /* Alterado para 'cover' para preencher o espaço */
     border-radius: 12px; /* Adiciona bordas arredondadas */
+    transition: transform 10s ease-out; /* Transição para o efeito Ken Burns */
+}
+
+/* Efeito Ken Burns: zoom sutil na imagem ativa */
+#inicio-hero .carrossel-item.ativo img {
+    transform: scale(1.1);
+}
+
+/* Overlay para melhorar a legibilidade do texto */
+#inicio-hero .carrossel-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, rgba(6, 27, 97, 0.7), rgba(0, 188, 212, 0.4)); /* Gradiente de azul para ciano */
+    z-index: 1;
+    border-radius: 12px;
 }
     
 #inicio-hero .carrossel-legenda {
@@ -244,6 +254,8 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
     transform: translate(-50%, -50%);
     text-align: center;
     width: 80%;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
 }
 
 /* Correção: empilhar slides do hero para evitar legendas sobrepostas */
@@ -268,6 +280,11 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
     visibility: visible;
     z-index: 2; /* coloca o slide ativo acima dos demais */
 }
+/* Animação de entrada para a legenda */
+#inicio-hero .carrossel-item.ativo .carrossel-legenda {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
 
 /* Esconde legendas de slides inativos (precaução extra) */
 #inicio-hero .carrossel-item:not(.ativo) .carrossel-legenda {
@@ -275,11 +292,11 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
 }
 
 #inicio-hero .carrossel-legenda {
-    z-index: 3; /* garante que a legenda fique sobre a imagem */
+    z-index: 3; /* garante que a legenda fique sobre a imagem e o overlay */
 }
 
 #inicio-hero h2 {
-    font-size: 2.5rem;
+    font-size: 3.5rem; /* Aumentado novamente */
     margin-bottom: 1rem;
     color: var(--white); /* Garante que o h2 seja branco */
     text-shadow: 0 6px 18px rgba(6,27,97,0.35);
@@ -319,9 +336,8 @@ section {
 
 section h2 {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #171d73; /* azul */
+    font-size: 3rem; /* Aumentado novamente */
+    margin-bottom: 1.5rem;    
 }
 
 section .secao-subtitulo {
@@ -470,7 +486,6 @@ section .secao-subtitulo {
 }
 
 .missao-item h3 {
-    color: #171d73;
     margin-bottom: 1.25rem;
 }
 
@@ -705,7 +720,6 @@ section .secao-subtitulo {
 
 @media (max-width: 480px) {
     header nav ul li { display:block; margin: 6px 0; }
-    header nav a { padding: 8px 10px; }
     #inicio-hero h2 { font-size: 1.6rem; }
 }
 
@@ -715,8 +729,35 @@ a:focus { outline: 2px dashed rgba(91,139,240,0.25); outline-offset: 3px; }
 /* ------------------ Overrides finais (importantes) ------------------ */
 /* Garante que os botões do carrossel fiquem acima dos slides/legendas */
 .carrossel .controle-carrossel,
-#inicio-hero .controle-carrossel {
+.carrossel .carrossel-dots,
+#inicio-hero .controle-carrossel,
+#inicio-hero .carrossel-dots {
     z-index: 6;
+}
+
+/* Estilo para os dots do carrossel do hero */
+#inicio-hero .carrossel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+}
+
+#inicio-hero .carrossel-dots button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.7); /* Borda mais visível */
+    background: transparent;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#inicio-hero .carrossel-dots button.ativo {
+    background-color: var(--accent); /* Ponto ativo com a cor de destaque */
+    transform: scale(1.1);
+    border-color: var(--accent);
 }
 
 /* Força os títulos das sections a ficarem centralizados em todos os contextos */
@@ -769,8 +810,7 @@ section h2 {
 }
 
 .equipe-cartao h4 {
-    font-size: 1.2rem;
-    color: #171d73;
+    font-size: 1.6rem; /* Aumentado novamente */
     margin-bottom: 5px;
 }
 
@@ -786,8 +826,7 @@ section h2 {
 }
 
 .cabecalho-pagina-titulo h1 {
-    font-size: 2.5rem;
-    color: #171d73;
+    font-size: 3.8rem; /* Aumentado novamente */
 }
 
 .cabecalho-pagina-titulo p {
@@ -836,8 +875,7 @@ section h2 {
 }
 
 .servico-item .servico-descricao h3 {
-    font-size: 2rem;
-    color: #171d73;
+    font-size: 2.8rem; /* Aumentado novamente */
     margin-bottom: 1.5rem;
 }
 
@@ -860,7 +898,6 @@ section h2 {
 }
 
 .porque-nos-item h3 {
-    color: #171d73; /* Mantém o título azul */
     margin-bottom: 10px;
 }
 
@@ -899,7 +936,6 @@ section h2 {
 }
 
 .depoimento-cartao h4 {
-    color: #171d73;
     font-weight: bold;
 }
 
@@ -921,7 +957,7 @@ section h2 {
     border-radius: 10px;
     box-shadow: 0 6px 18px rgba(6,27,97,0.06);
 }
-.servico-resumo h3{ color: var(--blue-700); margin-bottom: 8px; }
+.servico-resumo h3{ margin-bottom: 8px; }
 .servico-resumo ul{ margin-left: 18px; color: #333; margin-bottom: 10px; }
 .servico-list li::before {
     content: '';
@@ -972,8 +1008,7 @@ section h2 {
 }
 
 .blog-conteudo-postagem h3 {
-    color: #171d73;
-    font-size: 1.3rem;    margin-bottom: 1rem;
+    font-size: 1.8rem;    margin-bottom: 1rem; /* Aumentado novamente */
 }
 
 .blog-conteudo-postagem p {
@@ -997,12 +1032,12 @@ section h2 {
 .cartao .cartao-link {
     text-decoration: none;
     font-weight: bold;
-    color: #171d73; /* azul */
+    color: var(--blue-900); /* azul */
     transition: color 0.3s ease;
 }
 
 .cartao .cartao-link:hover {
-    color: #605f60; /* cinza */
+    color: var(--gray-600); /* cinza */
 }
 
 
@@ -1085,16 +1120,23 @@ a:focus, button:focus, .botao-cta:focus {
 @media (max-width: 900px) {
     .container { width: 92%; }
     header .container img { height: 64px; }
-    #inicio-hero { height: 50vh; min-height: 320px; }
-    #inicio-hero h2 { font-size: 1.8rem; }
+    /* Ajusta o tamanho do ícone em telas menores */
+    header .container .logo-link img:first-child {
+        height: 110px;
+    }
+    /* Ajusta o tamanho da imagem do nome em telas menores */
+    .logo-text-img {
+        height: 110px;
+    }
+    #inicio-hero { height: 50vh; }
+    #inicio-hero h2 { font-size: 2.5rem; } /* Aumentado novamente */
     .resumo-cartoes { flex-direction: column; }
     .missao-conteudo, .equipe-membros { flex-direction: column; gap: 18px; }
 }
 
 @media (max-width: 480px) {
     header nav ul li { display: block; margin: 6px 0; }
-    header nav a { padding: 8px 10px; }
-    .carrossel { border-radius: 6px; }
+    header nav a { padding: 8px 10px; }    .carrossel { border-radius: 6px; }
     .cartao { padding: 18px; }
 }
 
@@ -1123,7 +1165,7 @@ footer p { margin: 0; font-size: 0.95rem; }
 }
 
 .contato-info strong {
-    color: #171d73; /* azul */
+    color: var(--blue-900); /* azul */
 }
 
 /* Estilos para o Formulário de Contato */
@@ -1145,8 +1187,7 @@ footer p { margin: 0; font-size: 0.95rem; }
 .formulario-contato label {
     display: block;
     margin-bottom: 8px;
-    font-weight: bold;
-    color: #171d73; /* azul */
+    font-weight: bold;    
 }
 
 .formulario-contato input[type="text"],
@@ -1163,7 +1204,7 @@ footer p { margin: 0; font-size: 0.95rem; }
 .formulario-contato input[type="text"]:focus,
 .formulario-contato input[type="email"]:focus,
 .formulario-contato textarea:focus {
-    border-color: #171d73; /* azul */
+    border-color: var(--blue-900); /* azul */
     outline: none;
 }
 
@@ -1258,11 +1299,11 @@ footer p { margin: 0; font-size: 0.95rem; }
 .controle-carrossel {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(23,29,115,0.85);
+    transform: translateY(-50%) scale(1);
+    background-color: rgba(6, 27, 97, 0.6); /* Um pouco mais escuro para contraste */
     color: #fff;
     border: none;
-    padding: 12px 16px;
+    width: 45px; height: 45px; /* Tamanho do círculo */
     font-size: 1.25rem;
     cursor: pointer;
     border-radius: 999px;
@@ -1271,9 +1312,9 @@ footer p { margin: 0; font-size: 0.95rem; }
     z-index: 5;
 }
 
-.controle-carrossel:hover { transform: translateY(-50%) scale(1.06); background-color: var(--blue-700); }
-.controle-carrossel.prev { left: 12px; }
-.controle-carrossel.next { right: 12px; }
+.controle-carrossel:hover { transform: translateY(-50%) scale(1.1); background-color: var(--accent); }
+.controle-carrossel.prev { left: 20px; }
+.controle-carrossel.next { right: 20px; }
 
 /* Dots (paginacao) */
 .carrossel-dots {
@@ -1388,7 +1429,6 @@ footer p { margin: 0; font-size: 0.95rem; }
 }
 
 .equipe-detalhes h5 {
-    color: var(--blue-700);
     font-size: 1rem;
     margin-bottom: 0.75rem;
     text-align: center;
@@ -1435,36 +1475,61 @@ footer p { margin: 0; font-size: 0.95rem; }
 
 /* --- Estilos para a Faixa de Serviços Animada --- */
 .servicos-animados {
-    position: sticky;
-    top: 127px; /* Altura aproximada do cabeçalho em desktop */
+    margin-top: 1rem; /* Adiciona um espaço entre o header e a faixa */
+    position: relative; /* Necessário para que o z-index funcione corretamente */
+    z-index: -1; /* Força a faixa para uma camada inferior, garantindo que o menu fique por cima */
     background: var(--blue-900);
     color: var(--white);
-    padding: 0.75rem 0;
+    padding: 2rem 0; /* Aumentado para o máximo de altura */
     white-space: nowrap;
     overflow: hidden;
     display: flex;
-    z-index: 999; /* Garante que fique acima do conteúdo, mas abaixo do header */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 10px rgba(6, 27, 97, 0.1);
+}
+@media (max-width: 900px) {
+    .servicos-animados {
+        padding: 1rem 0; /* Altura menor no mobile */
+        font-size: 1.1rem; /* Fonte menor no mobile */
+    }
 }
 
 .servicos-animados .lista-servicos {
     display: flex;
-    animation: scroll-servicos 40s linear infinite;
+    animation: scroll-servicos 50s linear infinite; /* Velocidade ajustada */
 }
 
 .servicos-animados span {
     display: flex;
     align-items: center;
-    margin: 0 1.5rem;
-    font-size: 0.9rem;
+    margin: 0 3rem; /* Espaçamento ainda maior */
+    font-size: 1.8rem; /* Fonte ainda maior */
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+    /* A animação de cores é aplicada aqui */
+    animation: animate-glow-colors 10s linear infinite;
 }
 
 .servicos-animados span i {
-    margin-right: 8px;
-    color: var(--blue-300);
+    margin-right: 10px; /* Mais espaço para o ícone */
+    /* O ícone herda a cor e a animação do span */
+    color: inherit;
+    text-shadow: inherit;
+}
+
+.servicos-animados span:nth-child(1) { animation-delay: 0s; }
+.servicos-animados span:nth-child(2) { animation-delay: -1.25s; }
+.servicos-animados span:nth-child(3) { animation-delay: -2.5s; }
+.servicos-animados span:nth-child(4) { animation-delay: -3.75s; }
+.servicos-animados span:nth-child(5) { animation-delay: -5s; }
+.servicos-animados span:nth-child(6) { animation-delay: -6.25s; }
+.servicos-animados span:nth-child(7) { animation-delay: -7.5s; }
+.servicos-animados span:nth-child(8) { animation-delay: -8.75s; }
+
+.servicos-animados span:hover,
+.servicos-animados span:hover i {
+    /* No hover, a animação de cores é pausada para um efeito mais estável */
+    animation-play-state: paused;
 }
 
 @keyframes scroll-servicos {
@@ -1478,14 +1543,17 @@ footer p { margin: 0; font-size: 0.95rem; }
 
 /* Pausa a animação no hover */
 .servicos-animados:hover .lista-servicos {
-    animation-play-state: paused;
+    animation-play-state: paused; /* Pausa o scroll */
 }
 
-/* Ajuste para a posição da faixa em telas menores */
-@media (max-width: 900px) {
-    .servicos-animados { top: 91px; } /* Altura aproximada do cabeçalho em mobile */
+/* Animação de brilho com mais cores (verde, azul, laranja, amarelo) */
+@keyframes animate-glow-colors {
+    0%, 100% { text-shadow: 0 0 10px rgba(255, 193, 7, 0.9), 0 0 15px rgba(255, 193, 7, 0.7); } /* Amarelo */
+    20% { text-shadow: 0 0 10px rgba(255, 107, 0, 0.9), 0 0 15px rgba(255, 107, 0, 0.7); } /* Laranja */
+    40% { text-shadow: 0 0 10px rgba(76, 175, 80, 0.9), 0 0 15px rgba(76, 175, 80, 0.7); } /* Verde */
+    60% { text-shadow: 0 0 10px rgba(0, 188, 212, 0.9), 0 0 15px rgba(0, 188, 212, 0.7); } /* Ciano */
+    80% { text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.9), 0 0 15px rgba(var(--accent-rgb), 0.7); } /* Azul */
 }
-
 
 
 
@@ -1590,6 +1658,11 @@ footer p { margin: 0; font-size: 0.95rem; }
     .servico-item .servico-descricao { text-align: center; }
 
     /* Ajusta os cards de depoimentos e equipe para mobile */
+    .cabecalho-pagina-titulo h1 { font-size: 2.5rem; }
+    section h2 { font-size: 2.2rem; }
+    .servico-item .servico-descricao h3 { font-size: 2rem; }
+    .blog-conteudo-postagem h3 { font-size: 1.5rem; }
+
     .depoimentos-cartoes,
     .equipe-membros {
         flex-direction: column;
@@ -1656,7 +1729,6 @@ footer p { margin: 0; font-size: 0.95rem; }
 
 .faq-container summary {
     font-weight: bold;
-    color: var(--blue-700);
     cursor: pointer;
     list-style: none; /* Remove o marcador padrão */
     position: relative;
@@ -1682,4 +1754,56 @@ footer p { margin: 0; font-size: 0.95rem; }
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(6, 27, 97, 0.1);
+}
+
+/* --- Estilos para o Novo Menu Vertical --- */
+#menu-vertical {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(6, 27, 97, 0.85); /* Mesmo estilo do header */
+    backdrop-filter: saturate(120%) blur(10px);
+    border-radius: 999px; /* Formato de pílula */
+    padding: 15px 10px;
+    box-shadow: 0 8px 25px rgba(6, 27, 97, 0.2);
+    z-index: 1001;
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+#menu-vertical.menu-vertical-oculto {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%) translateX(-20px); /* Efeito de saída para a esquerda */
+}
+
+#menu-vertical ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu-vertical ul li {
+    margin: 15px 0;
+}
+
+#menu-vertical ul li a {
+    display: block;
+    color: var(--white);
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#menu-vertical ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--accent);
+}
+
+/* Esconde o menu vertical em telas pequenas para não atrapalhar */
+@media (max-width: 900px) {
+    #menu-vertical {
+        display: none;
+    }
 }

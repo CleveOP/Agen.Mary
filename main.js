@@ -44,15 +44,33 @@
  
             const prev = carrossel.querySelector('.controle-carrossel.prev');
             const next = carrossel.querySelector('.controle-carrossel.next');
+            const dotsContainer = carrossel.querySelector('.carrossel-dots');
  
             // O carrossel do hero usa legendas, os outros não.
             const useCaptions = carrossel.id === 'inicio-hero';
  
             let currentIndex = 0; let autoplayId = null; const AUTOPLAY_DELAY = 4500;
  
+            // Cria os dots de paginação
+            if (dotsContainer) {
+                itens.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    dot.setAttribute('aria-label', `Ir para o slide ${i + 1}`);
+                    dot.addEventListener('click', () => {
+                        showSlide(i);
+                        restartAutoplay();
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+            }
+            const dots = dotsContainer ? Array.from(dotsContainer.children) : [];
+
             function showSlide(i) {
                 currentIndex = (i + itens.length) % itens.length;
                 itens.forEach((it, idx) => it.classList.toggle('ativo', idx === currentIndex));
+                if (dots.length > 0) {
+                    dots.forEach((dot, idx) => dot.classList.toggle('ativo', idx === currentIndex));
+                }
             }
  
             function nextSlide() { showSlide(currentIndex + 1); }
@@ -137,4 +155,25 @@
             }
         });
     })();
+
+    // Menu Vertical Flutuante ao Rolar
+    (function setupVerticalMenu() {
+        const verticalMenu = qs('#menu-vertical');
+        // Adiciona uma verificação extra para garantir que o menu exista no DOM
+        if (!verticalMenu) {
+            console.warn('Elemento #menu-vertical não encontrado nesta página.');
+            return;
+        }
+
+        // Mostra ou esconde o menu baseado na posição de rolagem
+        window.addEventListener('scroll', () => {
+            // Mostra o menu após rolar 250 pixels para baixo
+            if (window.scrollY > 250) {
+                verticalMenu.classList.remove('menu-vertical-oculto');
+            } else {
+                verticalMenu.classList.add('menu-vertical-oculto');
+            }
+        });
+    })();
+
 })();
