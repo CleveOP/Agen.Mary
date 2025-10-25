@@ -267,6 +267,9 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
 /* Seções */
 section {
     padding: 5.5rem 0;
+    /* Aplica o mesmo efeito de vidro azulado do header */
+    background: rgba(6, 27, 97, 0.8);
+    backdrop-filter: saturate(120%) blur(10px);
 }
 
 section h2 {
@@ -830,7 +833,7 @@ section h2 {
 
 /* Estilos para a seção de Depoimentos */
 #depoimentos {
-    background-color: rgba(246, 249, 255, 0.7); /* Um pouco mais opaco para legibilidade */
+    /* O fundo agora é herdado do 'section' global para manter a consistência do gradiente */
 }
 
 .depoimentos-cartoes {
@@ -1675,11 +1678,9 @@ footer p { margin: 0; font-size: 0.95rem; }
 }
 
 /* ======= ALTERNÂNCIA DE FUNDO NAS SEÇÕES DE SERVIÇO ======= */
-.lista-secao-servico section:nth-of-type(even) {
-  background: linear-gradient(90deg, var(--surface) 80%, var(--muted) 100%);
-}
 .lista-secao-servico section:nth-of-type(odd) {
-  background: var(--white);
+  /* Remove o fundo branco sólido para usar o gradiente global */
+  background: transparent;
 }
 
 /* ======= CARD DE SERVIÇO ======= */
