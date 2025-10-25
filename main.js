@@ -30,7 +30,7 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visivel'); });
         }, { threshold: 0.1 }); // Reduzi o threshold para 0.1 para acionar a animação um pouco antes
-        qsa('.cartao, .sobre-conteudo, .servico-item, .processo-passo, .depoimento-cartao').forEach(el => observer.observe(el));
+        qsa('section h2, .cartao, .sobre-conteudo, .servico-item, .processo-passo, .depoimento-cartao, .missao-item, .equipe-cartao').forEach(el => observer.observe(el));
     })();
  
     // Carrossel: apenas imagem + título principal, com autoplay e dots

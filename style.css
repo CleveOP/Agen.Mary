@@ -206,100 +206,26 @@ header nav ul li.menu-suspenso:hover .fa-chevron-down {
     font-weight: 400; /* Fonte um pouco mais leve para o submenu */
 }
 
-/* Seção Hero (Banner) */
-#inicio-hero {
-    padding: 0; /* Remove o padding para a imagem ocupar todo o espaço */
-    position: relative;
-    height: 60vh; /* Altura do carrossel, 60% da altura da tela */
-    min-height: 400px;
-    color: #fff;
-    overflow: hidden;
+/* --- Nova Seção para o Banner CTA --- */
+.cta-banner-section {
+    padding: 3rem 0; /* Espaçamento vertical */
+    background-color: transparent; /* Removido o fundo azul para destacar apenas a imagem */
+    text-align: center; /* Centraliza o conteúdo */
 }
 
-#inicio-hero .carrossel-interno {
-    height: 100%;
-}
-
-#inicio-hero .carrossel-item {
-    height: 100%;
+/* Ajuste para o banner único */
+.cta-banner-section a {
+    display: inline-block; /* Permite que o link se comporte como um bloco, mas respeite a centralização */
+    max-width: 650px; /* Reduzido para deixar os banners menores */
     width: 100%;
 }
-#inicio-hero .carrossel-item img {
-    height: 100%;
-    width: 100%; /* Garante que a imagem ocupe a largura total */
-    object-fit: cover; /* Alterado para 'cover' para preencher o espaço */
-    border-radius: 12px; /* Adiciona bordas arredondadas */
-    transition: transform 10s ease-out; /* Transição para o efeito Ken Burns */
-}
 
-/* Efeito Ken Burns: zoom sutil na imagem ativa */
-#inicio-hero .carrossel-item.ativo img {
-    transform: scale(1.1);
-}
-
-/* Overlay para melhorar a legibilidade do texto */
-#inicio-hero .carrossel-item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, rgba(6, 27, 97, 0.7), rgba(0, 188, 212, 0.4)); /* Gradiente de azul para ciano */
-    z-index: 1;
-    border-radius: 12px;
-}
-    
-#inicio-hero .carrossel-legenda {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 80%;
-    opacity: 0;
-    transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
-}
-
-/* Correção: empilhar slides do hero para evitar legendas sobrepostas */
-#inicio-hero .carrossel-interno {
-    position: relative; /* permite posicionar os slides por cima */
-}
-
-#inicio-hero .carrossel-item {
-    position: absolute;
-    inset: 0;
+.cta-banner-section img {
+    max-width: 100%;
     width: 100%;
-    height: 100%;
-    display: none; /* esconder por padrão */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.45s ease, visibility 0.45s ease, transform 0.45s ease;
-}
-
-#inicio-hero .carrossel-item.ativo {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    z-index: 2; /* coloca o slide ativo acima dos demais */
-}
-/* Animação de entrada para a legenda */
-#inicio-hero .carrossel-item.ativo .carrossel-legenda {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-}
-
-/* Esconde legendas de slides inativos (precaução extra) */
-#inicio-hero .carrossel-item:not(.ativo) .carrossel-legenda {
-    display: none !important;
-}
-
-#inicio-hero .carrossel-legenda {
-    z-index: 3; /* garante que a legenda fique sobre a imagem e o overlay */
-}
-
-#inicio-hero h2 {
-    font-size: 3.5rem; /* Aumentado novamente */
-    margin-bottom: 1rem;
-    color: var(--white); /* Garante que o h2 seja branco */
-    text-shadow: 0 6px 18px rgba(6,27,97,0.35);
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Sombra sutil */
 }
 
 /* Estilo global para botões de Call-to-Action (CTA) */
@@ -457,6 +383,18 @@ section .secao-subtitulo {
     transform: scale(1.05); /* Aumenta ligeiramente a imagem */
     box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Adiciona uma sombra mais pronunciada */
     border-color: #171d73; /* A borda se torna azul no hover */
+}
+
+/* Estilo específico para a imagem na seção "Quem Somos" da página inicial */
+/* Remove a formatação circular que é usada na página "Sobre" */
+#quem-somos-home .sobre-imagem img {
+    width: 280px; /* Tamanho da imagem */
+    height: 280px; /* Mesma altura para formar um círculo */
+    object-fit: cover; /* Garante que a imagem preencha o círculo */
+    border-radius: 50%; /* Deixa a imagem redonda */
+    border: 6px solid var(--blue-700); /* Borda azul sólida */
+    box-shadow: 0 10px 25px rgba(22, 48, 127, 0.2); /* Sombra sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Estilos para a seção Missão, Visão e Valores */
@@ -729,35 +667,8 @@ a:focus { outline: 2px dashed rgba(91,139,240,0.25); outline-offset: 3px; }
 /* ------------------ Overrides finais (importantes) ------------------ */
 /* Garante que os botões do carrossel fiquem acima dos slides/legendas */
 .carrossel .controle-carrossel,
-.carrossel .carrossel-dots,
-#inicio-hero .controle-carrossel,
-#inicio-hero .carrossel-dots {
+.carrossel .carrossel-dots {
     z-index: 6;
-}
-
-/* Estilo para os dots do carrossel do hero */
-#inicio-hero .carrossel-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-}
-
-#inicio-hero .carrossel-dots button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.7); /* Borda mais visível */
-    background: transparent;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-#inicio-hero .carrossel-dots button.ativo {
-    background-color: var(--accent); /* Ponto ativo com a cor de destaque */
-    transform: scale(1.1);
-    border-color: var(--accent);
 }
 
 /* Força os títulos das sections a ficarem centralizados em todos os contextos */
@@ -767,7 +678,8 @@ section {
 
 /* Ajuste para garantir que o título da seção tenha margem inferior e centralização */
 section h2 {
-    margin-bottom: 3rem !important;
+    margin-top: 2rem !important; /* Adicionado espaço acima do título */
+    margin-bottom: 4rem !important; /* Mantém o espaço abaixo do título */
 }
 
 .missao-item h3 .fas {
@@ -1120,7 +1032,6 @@ a:focus, button:focus, .botao-cta:focus {
 @media (max-width: 900px) {
     .container { width: 92%; }
     header .container img { height: 64px; }
-    /* Ajusta o tamanho do ícone em telas menores */
     header .container .logo-link img:first-child {
         height: 110px;
     }
@@ -1128,8 +1039,6 @@ a:focus, button:focus, .botao-cta:focus {
     .logo-text-img {
         height: 110px;
     }
-    #inicio-hero { height: 50vh; }
-    #inicio-hero h2 { font-size: 2.5rem; } /* Aumentado novamente */
     .resumo-cartoes { flex-direction: column; }
     .missao-conteudo, .equipe-membros { flex-direction: column; gap: 18px; }
 }
@@ -1137,7 +1046,7 @@ a:focus, button:focus, .botao-cta:focus {
 @media (max-width: 480px) {
     header nav ul li { display: block; margin: 6px 0; }
     header nav a { padding: 8px 10px; }    .carrossel { border-radius: 6px; }
-    .cartao { padding: 18px; }
+    .cartao { padding: 18px; }    
 }
 
 /* Ajuste leve no botão do carrossel para dispositivos touch */
@@ -1712,6 +1621,21 @@ footer p { margin: 0; font-size: 0.95rem; }
     border-top: 1px solid rgba(6, 27, 97, 0.05);
     border-bottom: 1px solid rgba(6, 27, 97, 0.05);
 }
+
+/* Estilo para a imagem de destaque na página de sites */
+.hero-sites-imagem {
+    margin-top: 3rem; /* Espaço entre o botão e a imagem */
+}
+
+.hero-sites-imagem img {
+    max-width: 100%;
+    width: 650px; /* Reduzido para deixar a imagem menor */
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(6, 27, 97, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 
 /* --- Estilos para a Seção de FAQ --- */
 .faq-container details {
