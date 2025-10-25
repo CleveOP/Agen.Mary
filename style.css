@@ -1595,3 +1595,91 @@ footer p { margin: 0; font-size: 0.95rem; }
         flex-direction: column;
     }
 }
+
+/* --- Estilos Específicos para a Página "Criar Site" --- */
+
+/* Nova cor de destaque vibrante */
+.page-sites {
+    --accent-vibrant: #FFC107; /* Amarelo/Dourado vibrante */
+    --accent-vibrant-dark: #FFA000; /* Tom mais escuro para o hover */
+}
+
+/* Altera a cor dos botões de CTA na página de sites */
+.page-sites .botao-cta {
+    background: var(--accent-vibrant);
+    color: var(--blue-900); /* Texto escuro para melhor contraste com o amarelo */
+    box-shadow: 0 6px 18px rgba(255, 193, 7, 0.25);
+}
+
+.page-sites .botao-cta:hover {
+    background: var(--accent-vibrant-dark);
+    box-shadow: 0 12px 30px rgba(255, 160, 0, 0.3);
+}
+
+/* Altera a cor dos ícones dos cards na página de sites */
+.page-sites .cartao-icone {
+    color: var(--accent-vibrant);
+}
+
+/* Adiciona mais cor e destaque aos cards na página de sites */
+.page-sites .cartao {
+    background: linear-gradient(180deg, var(--white), rgba(255, 193, 7, 0.05)); /* Gradiente sutil de branco para amarelo claro */
+    border: 1px solid rgba(255, 193, 7, 0.3); /* Borda amarela semitransparente */
+    box-shadow: 0 12px 30px rgba(255, 193, 7, 0.1);
+}
+
+/* Destaque para palavras em negrito dentro da página */
+.page-sites strong {
+    color: var(--blue-700);
+}
+
+/* Garante que a nova seção de tecnologia também tenha o fundo alternado */
+.page-sites main > section:nth-of-type(2n+1):not(#hero-sites) {
+    background-color: var(--surface);
+    border-top: 1px solid rgba(6, 27, 97, 0.05);
+    border-bottom: 1px solid rgba(6, 27, 97, 0.05);
+}
+
+/* --- Estilos para a Seção de FAQ --- */
+.faq-container details {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(6, 27, 97, 0.1);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.faq-container details[open] {
+    background-color: var(--white);
+}
+
+.faq-container summary {
+    font-weight: bold;
+    color: var(--blue-700);
+    cursor: pointer;
+    list-style: none; /* Remove o marcador padrão */
+    position: relative;
+    padding-right: 1.5rem;
+}
+
+.faq-container summary::after { /* Adiciona um ícone de seta */
+    content: '\f078'; /* Ícone de seta para baixo do Font Awesome */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.faq-container details[open] summary::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.faq-container details p {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(6, 27, 97, 0.1);
+}
