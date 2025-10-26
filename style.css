@@ -758,50 +758,49 @@ section h2 {
 }
 
 .lista-secao-servico .servico-item {
-    padding: 5.5rem 0;
-    background: rgba(246, 249, 255, 0.6); /* Cor --surface com 60% de opacidade */
-    backdrop-filter: blur(12px); /* Efeito fosco/vidro */
+    position: relative;
+    padding: 7rem 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efeito Parallax */
+    color: var(--white);
+    text-align: center;
+    overflow: hidden;
 }
 
 .servico-item-conteudo {
+    position: relative;
+    z-index: 2;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 50px;
+    justify-content: center;
 }
 
 .servico-item.reverso .servico-item-conteudo {
     flex-direction: row-reverse;
 }
 
-.servico-item .servico-imagem {
-    flex: 1;
-    max-width: 40%;
-}
-
-.servico-item .servico-imagem img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.servico-item .servico-imagem img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-}
-
 .servico-item .servico-descricao {
-    flex: 1;
-    max-width: 60%;
+    max-width: 700px; /* Limita a largura do texto para melhor leitura */
+    background: rgba(6, 27, 97, 0.75); /* Sobreposição azul escura apenas no texto */
+    backdrop-filter: blur(8px); /* Aumentei o desfoque para melhor legibilidade */
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .servico-item .servico-descricao h3 {
     font-size: 2.8rem; /* Aumentado novamente */
     margin-bottom: 1.5rem;
+    color: var(--white);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
 .servico-item .servico-descricao p {
     margin-bottom: 2rem;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 /* Estilos para a seção "Por que nos escolher?" */
