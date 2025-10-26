@@ -141,14 +141,14 @@
         if (!menuButton || !nav) return;
 
         menuButton.addEventListener('click', () => {
-            const isOpened = nav.classList.toggle('menu-aberto');
+            const isOpened = nav.classList.toggle('nav-aberto');
             menuButton.setAttribute('aria-expanded', isOpened);
             
             // Troca o ícone para 'X' quando o menu está aberto
             const icon = menuButton.querySelector('i');
             if (isOpened) {
                 icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+                icon.classList.add('fa-times'); // 'fa-times' é o ícone de 'X'
             } else {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
