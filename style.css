@@ -9,6 +9,7 @@
 html, body {
     /* Garante que o body ocupe no mínimo 100% da altura da tela */
     min-height: 100%;
+    overflow-x: hidden; /* Impede a rolagem horizontal em todo o site */
 }
 
 /* Variáveis de tema: azul / branco / cinza */
