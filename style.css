@@ -2111,8 +2111,7 @@ a:focus-visible,
     outline-offset: 2px;
 }
 
-transform: rotate(180deg) scale(1.07);
-}
+
 
 /* ======= MELHORIA DE FOCO ACESSÍVEL ======= */
 a:focus-visible,
