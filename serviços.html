@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
@@ -33,10 +33,10 @@
 </head>
 <body>
     <!-- Novo Menu Vertical Flutuante -->
-    <nav id="menu-vertical" class="menu-vertical-oculto">
+    <nav id="menu-vertical" class="menu-vertical-oculto" aria-label="Menu lateral">
         <ul>
             <li><a href="index.html" title="Início"><i class="fas fa-home"></i></a></li>
-            <li><a href="serviços.html" title="Serviços"><i class="fas fa-cogs"></i></a></li>
+            <li><a href="serviços.html" title="Serviços" aria-current="page"><i class="fas fa-cogs"></i></a></li>
             <li><a href="sites.html" title="Criar Site"><i class="fas fa-laptop-code"></i></a></li>
             <li><a href="sobre.html" title="Sobre"><i class="fas fa-info-circle"></i></a></li>
             <li><a href="contact.html" title="Contato"><i class="fas fa-envelope"></i></a></li>
@@ -48,11 +48,11 @@
                 <img src="./img/LogoMsCriacoes.png" alt="Logo da Agência MS Criações">
                 <h1 class="logo">MS Criações</h1>
             </a>
-            <nav id="nav-principal">
+            <nav id="nav-principal" aria-label="Menu principal">
                 <ul>
                     <li><a href="index.html">Início</a></li>
                     <li class="menu-suspenso">
-                        <a href="serviços.html">Serviços <i class="fas fa-chevron-down"></i></a>
+                        <a href="serviços.html" aria-current="page">Serviços <i class="fas fa-chevron-down"></i></a>
                         <ul class="menu-suspenso-conteudo">
                             <li><a href="serviços.html#visual-identity">Identidade Visual</a></li>
                             <li><a href="serviços.html#branding">Branding e Posicionamento</a></li>
@@ -110,7 +110,7 @@
         </div>
 
         <div class="lista-secao-servico">
-            <section id="visual-identity" class="servico-item" style="background-image: url('./img/identidadeVisual.jpg');">
+            <section id="visual-identity" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>Identidade Visual</h3>
@@ -120,7 +120,7 @@
                 </div>
             </section>
 
-            <section id="content-creation" class="servico-item" style="background-image: url('./img/criacaoconteudo.jpg');">
+            <section id="content-creation" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>Criação de Conteúdo</h3>
@@ -130,7 +130,7 @@
                 </div>
             </section>
 
-            <section id="social-media" class="servico-item" style="background-image: url('./img/Gestaodemidias.jpg');">
+            <section id="social-media" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>Gestão de Mídias Sociais</h3>
@@ -140,7 +140,7 @@
                 </div>
             </section>
 
-            <section id="website-dev" class="servico-item" style="background-image: url('./img/criacaodesites.jpg');">
+            <section id="website-dev" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>Criação de Sites e Landing Pages</h3>
@@ -150,7 +150,7 @@
                 </div>
             </section>
             
-            <section id="paid-traffic" class="servico-item" style="background-image: url('./img/trafegopago.jpg');">
+            <section id="paid-traffic" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>Tráfego Pago e Anúncios</h3>
@@ -160,7 +160,7 @@
                 </div>
             </section>
 
-            <section id="seo-sem" class="servico-item" style="background-image: url('./img/SEO.jpg');">
+            <section id="seo-sem" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>SEO & SEM</h3>
@@ -170,7 +170,7 @@
                 </div>
             </section>
 
-            <section id="graphic-design" class="servico-item" style="background-image: url('./img/design.jpg');">
+            <section id="graphic-design" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>Design Gráfico</h3>
@@ -180,7 +180,7 @@
                 </div>
             </section>
 
-            <section id="branding" class="servico-item" style="background-image: url('./img/posicionamento.jpg');">
+            <section id="branding" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>Branding e Posicionamento</h3>                            
@@ -190,7 +190,7 @@
                 </div>
             </section>
 
-            <section id="marketing-consult" class="servico-item" style="background-image: url('https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <section id="marketing-consult" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>Consultoria e Mentoria</h3>
@@ -200,7 +200,7 @@
                 </div>
             </section>
 
-            <section id="email-marketing" class="servico-item" style="background-image: url('https://images.pexels.com/photos/1181352/pexels-photo-1181352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <section id="email-marketing" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>E-mail Marketing</h3>
@@ -210,7 +210,7 @@
                 </div>
             </section>
 
-            <section id="interprete" class="servico-item" style="background-image: url('https://images.pexels.com/photos/7710085/pexels-photo-7710085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <section id="interprete" class="servico-item">
                 <div class="container servico-item-conteudo">
                     <div class="servico-descricao">
                             <h3>Serviço de Intérprete de Libras</h3>
@@ -263,7 +263,7 @@
             </div>
         </section>
 
-        <section id="planos" class="container">
+        <section id="planos" class="section-image-bg">
             <div class="titulo-wrapper">
                 <h2>Nossos Planos</h2>
             </div>
@@ -309,10 +309,10 @@
             <img src="./img/LogoMsCriacoes.png" alt="Logo MS Criações">
         </a>
         <div class="redes-sociais">
-            <a href="https://www.instagram.com/agenciamscriacoes" target="_blank" title="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=100081991680252" target="_blank" title="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/5511966323257" target="_blank" title="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.linkedin.com/in/ag%C3%AAncia-ms-cria%C3%A7%C3%B5es-60936438a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app&lipi=urn%3Ali%3Apage%3Ad_flagship3_messaging_conversation_detail%3B7OPuw2mGSeuJONG70EQP7w%3D%3D" target="_blank" title="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/agenciamscriacoes" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100081991680252" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/5511966323257" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/ag%C3%AAncia-ms-cria%C3%A7%C3%B5es-60936438a" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <p>&copy; <span id="current-year"></span> MS Criações. Todos os direitos reservados.</p>
     </footer>

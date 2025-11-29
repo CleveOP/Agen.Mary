@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,13 +35,13 @@
     </div>
 
     <!-- Menu Vertical Flutuante -->
-    <nav id="menu-vertical" class="menu-vertical-oculto">
+    <nav id="menu-vertical" class="menu-vertical-oculto" aria-label="Menu lateral">
         <ul>
             <li><a href="index.html" title="Início"><i class="fas fa-home"></i></a></li>
             <li><a href="serviços.html" title="Serviços"><i class="fas fa-cogs"></i></a></li>
             <li><a href="sites.html" title="Criar Site"><i class="fas fa-laptop-code"></i></a></li>
             <li><a href="sobre.html" title="Sobre"><i class="fas fa-info-circle"></i></a></li>
-            <li><a href="contact.html" title="Contato"><i class="fas fa-envelope"></i></a></li>
+            <li><a href="contact.html" title="Contato" aria-current="page"><i class="fas fa-envelope"></i></a></li>
         </ul>
     </nav>
 
@@ -51,7 +51,7 @@
                 <img src="./img/LogoMsCriacoes.png" alt="Logo da Agência MS Criações">
                 <h1 class="logo">MS Criações</h1>
             </a>
-            <nav id="nav-principal">
+            <nav id="nav-principal" aria-label="Menu principal">
                 <ul>
                     <li><a href="index.html">Início</a></li>
                     <li class="menu-suspenso">
@@ -72,7 +72,7 @@
                     </li>
                     <li><a href="sites.html">Criar Site</a></li>
                     <li><a href="sobre.html">Sobre</a></li>
-                    <li><a href="contact.html" class="ativo">Contato</a></li>
+                    <li><a href="contact.html" class="ativo" aria-current="page">Contato</a></li>
                 </ul>
             </nav>
             <button id="menu-hamburguer" aria-label="Abrir menu" aria-expanded="false">
@@ -118,7 +118,7 @@
             </div>
             <div class="contato-info">
                 <p><strong>E-mail:</strong> <a href="mailto:agenciamscriacoes@gmail.com">agenciamscriacoes@gmail.com</a></p>
-                <p><strong>WhatsApp:</strong> <a href="https://wa.me/5511966323257" target="_blank" rel="noopener noreferrer">(11) 96632-3257</a></p>
+                <p><strong>WhatsApp:</strong> <a href="https://wa.me/5511966323257?text=Ol%C3%A1%2C+vim+pelo+site+e+gostaria+de+um+or%C3%A7amento." target="_blank" rel="noopener noreferrer">(11) 96632-3257</a></p>
                 <p><strong>Atendimento:</strong> 100% digital. Atendemos clientes de todo o Brasil.</p>
             </div>
 
@@ -130,10 +130,10 @@
             <img src="./img/LogoMsCriacoes.png" alt="Logo MS Criações">
         </a>
         <div class="redes-sociais">
-            <a href="https://www.instagram.com/agenciamscriacoes" target="_blank" title="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=100081991680252" target="_blank" title="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/5511966323257" target="_blank" title="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.linkedin.com/in/ag%C3%AAncia-ms-cria%C3%A7%C3%B5es-60936438a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app&lipi=urn%3Ali%3Apage%3Ad_flagship3_messaging_conversation_detail%3B7OPuw2mGSeuJONG70EQP7w%3D%3D" target="_blank" title="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/agenciamscriacoes" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100081991680252" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/5511966323257" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/ag%C3%AAncia-ms-cria%C3%A7%C3%B5es-60936438a" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <p>&copy; <span id="current-year"></span> MS Criações. Todos os direitos reservados.</p>
     </footer>

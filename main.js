@@ -67,7 +67,11 @@
 
             function showSlide(i) {
                 currentIndex = (i + itens.length) % itens.length;
-                itens.forEach((it, idx) => it.classList.toggle('ativo', idx === currentIndex));
+                // Move o container dos slides para exibir o slide correto
+                if (interno) {
+                    interno.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
+                itens.forEach((it, idx) => it.classList.toggle('ativo', idx === currentIndex)); // Mantém a classe para outros estilos
                 if (dots.length > 0) {
                     dots.forEach((dot, idx) => dot.classList.toggle('ativo', idx === currentIndex));
                 }

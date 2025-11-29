@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,20 +30,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-    <div class="background-logos" id="logo-container">
-        <!-- Logos serão adicionados aqui via JavaScript -->
-    </div>
-
-    <!-- ... o resto do seu conteúdo ... -->
+<body class="page-sobre">
 
         <!-- Novo Menu Vertical Flutuante -->
-    <nav id="menu-vertical" class="menu-vertical-oculto">
+    <nav id="menu-vertical" class="menu-vertical-oculto" aria-label="Menu lateral">
         <ul>
             <li><a href="index.html" title="Início"><i class="fas fa-home"></i></a></li>
             <li><a href="serviços.html" title="Serviços"><i class="fas fa-cogs"></i></a></li>
             <li><a href="sites.html" title="Criar Site"><i class="fas fa-laptop-code"></i></a></li>
-            <li><a href="sobre.html" title="Sobre"><i class="fas fa-info-circle"></i></a></li>
+            <li><a href="sobre.html" title="Sobre" aria-current="page"><i class="fas fa-info-circle"></i></a></li>
             <li><a href="contact.html" title="Contato"><i class="fas fa-envelope"></i></a></li>
         </ul>
     </nav>
@@ -53,7 +48,7 @@
                 <img src="./img/LogoMsCriacoes.png" alt="Logo da Agência MS Criações">
                 <h1 class="logo">MS Criações</h1>
             </a>
-            <nav id="nav-principal">
+            <nav id="nav-principal" aria-label="Menu principal">
                 <ul>
                     <li><a href="index.html">Início</a></li>
                     <li class="menu-suspenso">
@@ -73,7 +68,7 @@
                         </ul>
                     </li>
                     <li><a href="sites.html">Criar Site</a></li>
-                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="sobre.html" aria-current="page">Sobre</a></li>
                     <li><a href="contact.html">Contato</a></li>
                 </ul>
             </nav>
@@ -254,34 +249,39 @@
             </div>
         </section>
 
-        <section id="depoimentos" class="container">
+        <section id="depoimentos" class="container carrossel">
             <div class="titulo-wrapper">
                 <h2>Capítulos de Sucesso</h2>
             </div>
-            <div class="depoimentos-cartoes">
-                <div class="depoimento-cartao">
-                    <img src="./img/LogoED.png" alt="Logo do cliente Espaço Dasedeles">                    
-                    <p>"Quando começamos, éramos apenas uma ideia solta no Instagram. A Maria estruturou nosso feed, criou uma identidade visual que realmente representa nosso propósito, e até nos ajudou a escolher um novo nome que conecta com nosso público."</p>
-                    <h4>- @espacodelasedeles</h4>
-                </div>
-                <div class="depoimento-cartao">
-                    <img src="./img/LogoNills.png" alt="Logo do cliente Nill Studio">
-                    <p>"Profissionalismo, criatividade e resultado. Recomendo de olhos fechados."</p>
-                    <h4>- @nillstudiobelavista</h4>
-                </div>
-                <div class="depoimento-cartao">
-                    <img src="./img/LogoSophie.png" alt="Logo do cliente Sophie Laços">
-                    <p>"Esse projeto é muito especial: é o negócio que construí com minha filha Sophie, uma mini empreendedora cheia de sonhos. Criamos tudo do zero — identidade visual, conteúdo, redes sociais."</p>
-                    <h4>- @sophielacosonhosebeleza</h4>
-                </div>
-                <div class="depoimento-cartao">
-                    <img src="./img/LogoJA.png" alt="Logo do cliente Brecho e Outlet J.A">
-                    <p>"O brechó era só uma loja tímida sem presença no digital. Com a Maria, ganhamos uma identidade forte, conteúdo que engaja e uma presença digital que atrai clientes todos os dias."</p>
-                    <h4>- @brechoeoutletj.a</h4>
+            <div class="carrossel-inner-wrap">
+                <div class="carrossel-interno">
+                    <div class="carrossel-item ativo">
+                        <div class="depoimento-slide">
+                            <img src="./img/LogoED.png" alt="Logo do cliente Espaço Dasedeles">
+                            <p>"Quando começamos, éramos apenas uma ideia solta no Instagram. A Maria estruturou nosso feed, criou uma identidade visual que realmente representa nosso propósito, e até nos ajudou a escolher um novo nome que conecta com nosso público."</p>
+                            <h4>- @espacodelasedeles</h4>
+                        </div>
+                    </div>
+                    <div class="carrossel-item">
+                        <div class="depoimento-slide">
+                            <img src="./img/LogoNills.png" alt="Logo do cliente Nill Studio">
+                            <p>"Profissionalismo, criatividade e resultado. Recomendo de olhos fechados."</p>
+                            <h4>- @nillstudiobelavista</h4>
+                        </div>
+                    </div>
+                    <div class="carrossel-item">
+                        <div class="depoimento-slide">
+                            <img src="./img/LogoSophie.png" alt="Logo do cliente Sophie Laços">
+                            <p>"Esse projeto é muito especial: é o negócio que construí com minha filha Sophie, uma mini empreendedora cheia de sonhos. Criamos tudo do zero — identidade visual, conteúdo, redes sociais."</p>
+                            <h4>- @sophielacosonhosebeleza</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <button class="controle-carrossel prev">&lt;</button>
+            <button class="controle-carrossel next">&gt;</button>
+            <div class="carrossel-dots"></div>
         </section>
-
     </main>
 
     <footer>
@@ -289,10 +289,10 @@
             <img src="./img/LogoMsCriacoes.png" alt="Logo MS Criações">
         </a>
         <div class="redes-sociais">
-            <a href="https://www.instagram.com/agenciamscriacoes" target="_blank" title="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/profile.php?id=100081991680252" target="_blank" title="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/5511966323257" target="_blank" title="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.linkedin.com/in/ag%C3%AAncia-ms-cria%C3%A7%C3%B5es-60936438a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app&lipi=urn%3Ali%3Apage%3Ad_flagship3_messaging_conversation_detail%3B7OPuw2mGSeuJONG70EQP7w%3D%3D" target="_blank" title="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/agenciamscriacoes" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100081991680252" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/5511966323257" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/ag%C3%AAncia-ms-cria%C3%A7%C3%B5es-60936438a" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <p>&copy; <span id="current-year"></span> MS Criações. Todos os direitos reservados.</p>
     </footer>
