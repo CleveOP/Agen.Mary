@@ -724,6 +724,13 @@ footer p {
     font-size: 1.8rem;
     display: block;
     padding: 1rem;
+    color: var(--cor-azul-escuro); /* Adicionado para deixar o texto azul no mobile */
+  }
+
+  /* Garante que o link da página ativa também fique azul no mobile */
+  header nav a[aria-current="page"] {
+    color: var(--cor-azul-escuro);
+    background-color: rgba(42, 58, 141, 0.1); /* Fundo sutil para destacar o item ativo */
   }
 
   .menu-suspenso-conteudo {
@@ -742,6 +749,17 @@ footer p {
   .menu-suspenso-conteudo li a {
     font-size: 1.2rem;
     color: var(--cor-cinza-texto);
+  }
+
+  /* Garante que o conteúdo da página de serviços fique centralizado no mobile */
+  .page-servicos .servico-item-conteudo {
+    justify-content: center;
+  }
+
+
+  /* Esconde o submenu de serviços no modo responsivo */
+  .menu-suspenso .menu-suspenso-conteudo {
+    display: none !important;
   }
 
   header .container .logo-link img:first-child {
